@@ -1,11 +1,13 @@
 import * as THREE from "three";
 import { createSnow, updateSnow } from "./snowfall";
 import { createSnowPlane } from "./snow-plane";
-import { setupControls } from "./controls";
+import gsap from "gsap";
 import { createTree } from "./tree";
 import { SSAOPass } from "three/examples/jsm/postprocessing/SSAOPass.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+
+let camera;
 
 const start = () => {
     // ==============
@@ -13,7 +15,7 @@ const start = () => {
     // ==============
     const scene = new THREE.Scene();
     scene.background = createGradientTexture("#9966CC", "#336699");
-    scene.fog = new THREE.FogExp2("#A9AADA", 0.0017);
+    scene.fog = new THREE.FogExp2("#A9AADA", 0.0014);
 
     // ============
     //     Snow
@@ -24,20 +26,20 @@ const start = () => {
     // ==============
     //     Lights
     // ==============
-    const directionalLight = new THREE.DirectionalLight("#9966cc", 2);
-    directionalLight.position.set(0, 300, 1500);
+    const directionalLight = new THREE.DirectionalLight("#9966cc", 3);
+    directionalLight.position.set(0, 300, -1500);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
-    const ambientLight = new THREE.AmbientLight("white", 0.5);
+    const ambientLight = new THREE.AmbientLight("#A9AADA", 0.5);
     scene.add(ambientLight);
 
     directionalLight.shadow.camera.left = -800;
     directionalLight.shadow.camera.right = 800;
-    directionalLight.shadow.camera.top = 1000;
-    directionalLight.shadow.camera.bottom = -100;
+    directionalLight.shadow.camera.top = 10;
+    directionalLight.shadow.camera.bottom = -1000;
     directionalLight.shadow.camera.near = 10;
     directionalLight.shadow.camera.far = 4000;
-    directionalLight.shadow.darkness = 0.8;
+    directionalLight.shadow.darkness = 1;
     directionalLight.shadow.mapSize.width = 2048; // Increase shadow resolution
     directionalLight.shadow.mapSize.height = 2048;
 
@@ -48,9 +50,11 @@ const start = () => {
     const aspect = window.innerWidth / window.innerHeight;
     const near = 1;
     const far = 20000;
-    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.y = 20;
-    camera.position.z = -100;
+    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.y = 1100;
+    camera.position.z = 0;
+    camera.lookAt(0, 0, 0);
+    camera.position.x = 150;
 
     // ===============
     //     Renderer
@@ -79,15 +83,9 @@ const start = () => {
 
     createTree(scene);
 
-    // ================
-    //     Controls
-    // ================
-    const controls = setupControls(camera, renderer);
-
     renderer.setAnimationLoop(() => {
         updateSnow();
         camera.updateProjectionMatrix();
-        controls.update();
         renderer.render(scene, camera);
     });
     document.body.appendChild(renderer.domElement);
@@ -113,5 +111,23 @@ function createGradientTexture(color1, color2) {
 
     return new THREE.CanvasTexture(canvas);
 }
+
+function startCameraAnimation() {
+    gsap.to(camera.position, {
+        y: 50, // Move down
+        z: -200, // Move forward
+        duration: 3,
+        ease: "power2.out",
+    });
+
+    gsap.to(camera.rotation, {
+        x: -Math.PI / 11, // Slight tilt to look forward
+        duration: 3,
+        ease: "power2.out",
+    });
+}
+
+// Call this function after loading
+setTimeout(startCameraAnimation, 2000);
 
 start();
