@@ -35,13 +35,16 @@ export const createSnow = () => {
         new THREE.Float32BufferAttribute(velocities, 3),
     );
 
+    const texture = new THREE.TextureLoader().load(
+        "textures/snow/snow-ball.png",
+    );
     const material = new THREE.PointsMaterial({
-        size: 4,
+        map: texture,
+        size: 2,
         blending: THREE.AdditiveBlending,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.5,
         depthTest: false,
-        color: "white",
     });
 
     particles = new THREE.Points(geom, material);

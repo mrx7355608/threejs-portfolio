@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-export const createSnowPlane = (renderer) => {
-    const geometry = new THREE.PlaneGeometry(500, 500, 256, 256);
+export const createSnowPlane = () => {
+    const geometry = new THREE.PlaneGeometry(5000, 5000, 128, 128);
     geometry.rotateX(-Math.PI / 2);
 
     /* Loading textures */
@@ -16,8 +16,11 @@ export const createSnowPlane = (renderer) => {
         normalMap: normal,
         displacementMap: displacement,
         roughnessMap: rough,
-        displacementScale: 5,
+        displacementScale: 200,
+        displacementBias: -60,
+        roughness: 2,
     });
     const mesh = new THREE.Mesh(geometry, material);
+    mesh.receiveShadow = true;
     return mesh;
 };
