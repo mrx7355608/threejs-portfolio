@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { cover } from "three/src/extras/TextureUtils";
-import { createSnow, updateSnow } from "./snow";
+import { createSnow, updateSnow } from "./snowfall";
+import { createSnowPlane } from "./snow-plane";
+import { setupControls } from "./controls";
 
 const start = () => {
     // ==============
@@ -9,23 +11,6 @@ const start = () => {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("black");
     scene.fog = new THREE.FogExp2("black", 0.0014);
-
-    // ==============
-    //     Plain
-    // ==============
-    const worldWidth = 128;
-    const worldDepth = 128;
-    const geometry = new THREE.PlaneGeometry(
-        2000,
-        2000,
-        worldWidth - 1,
-        worldDepth - 1,
-    );
-    geometry.rotateX(-Math.PI / 2);
-
-    const material = new THREE.MeshPhongMaterial({ color: "white" });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
 
     // ============
     //     Snow
@@ -50,7 +35,8 @@ const start = () => {
     const near = 1;
     const far = 20000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.y = 10;
+    camera.position.y = 20;
+    camera.position.z = -100;
 
     // ===============
     //     Renderer
@@ -58,9 +44,21 @@ const start = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // ==============
+    //     Plain
+    // ==============
+    const plainMesh = createSnowPlane(renderer);
+    scene.add(plainMesh);
+
+    // ================
+    //     Controls
+    // ================
+    const controls = setupControls(camera, renderer);
+
     renderer.setAnimationLoop(() => {
-        camera.updateProjectionMatrix();
         updateSnow();
+        controls.update();
         renderer.render(scene, camera);
     });
     document.body.appendChild(renderer.domElement);
