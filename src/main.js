@@ -12,8 +12,8 @@ const start = () => {
     //     Scene
     // ==============
     const scene = new THREE.Scene();
-    scene.background = createGradientTexture("#FF9966", "#336699");
-    scene.fog = new THREE.FogExp2("#BBBBBB", 0.0017);
+    scene.background = createGradientTexture("#9966CC", "#336699");
+    scene.fog = new THREE.FogExp2("#A9AADA", 0.0017);
 
     // ============
     //     Snow
@@ -24,7 +24,7 @@ const start = () => {
     // ==============
     //     Lights
     // ==============
-    const directionalLight = new THREE.DirectionalLight("#3366AF", 7);
+    const directionalLight = new THREE.DirectionalLight("#9966cc", 2);
     directionalLight.position.set(0, 300, 1500);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
