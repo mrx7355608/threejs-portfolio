@@ -20,7 +20,7 @@ export const Lights = () => {
         return directionalLight;
     };
 
-    const initAmbientLight = () => new THREE.AmbientLight("#A9AADA", 0.5);
+    const initAmbientLight = () => new THREE.AmbientLight("#ffffff", 0.5);
 
     return {
         directional: initDirectionalLight(),

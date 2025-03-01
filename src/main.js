@@ -28,7 +28,10 @@ init();
 
 /* 3D text */
 const { createText } = Text3D(scene);
-createText("Hello!");
+createText("Hello");
+
+/* Animations */
+const { playIntroAnimation } = Animations(camera, scene);
 
 /* Animation Loop */
 renderer.setAnimationLoop(() => {
@@ -41,5 +44,6 @@ document.addEventListener("wheel", (e) => {
     camera.position.z += e.deltaY / 100;
 });
 
-const { playIntroAnimation } = Animations(camera);
-setTimeout(playIntroAnimation, 2000);
+setTimeout(() => {
+    playIntroAnimation();
+}, 2000);

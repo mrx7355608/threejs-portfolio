@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { getEvents } from "./events";
 
 export const Animations = (camera) => {
     const playIntroAnimation = () => {
@@ -13,6 +14,11 @@ export const Animations = (camera) => {
             x: -Math.PI / 11,
             duration: 3,
             ease: "power2.out",
+            onComplete: () => {
+                getEvents().dispatchEvent(
+                    new Event("intro-animation-complete"),
+                );
+            },
         });
     };
 
