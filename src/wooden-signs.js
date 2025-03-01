@@ -4,10 +4,11 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import * as THREE from "three";
 
 export const SetupWoodenSignModels = (scene) => {
-    const loader = new GLTFLoader();
+    const modelLoader = new GLTFLoader();
+    const fontLoader = new FontLoader();
 
-    const initWoodenSignModels = () => {
-        loader.load("models/wooden-sign2.glb", (gltf) => {
+    const initWoodenSignModel = () => {
+        modelLoader.load("models/wooden-sign2.glb", (gltf) => {
             const sign = gltf.scene;
             sign.scale.set(60, 80, 80);
             sign.rotation.y = -270;
@@ -19,41 +20,42 @@ export const SetupWoodenSignModels = (scene) => {
                     child.receiveShadow = true;
                 }
             });
-
-            const loader2 = new FontLoader();
-            loader2.load("fonts/ibm_blex.typeface.json", (font) => {
-                const textGeometry = new TextGeometry("Projects", {
-                    font: font,
-                    size: 9, // Text size
-                    depth: 2, // Depth (thickness)
-                    curveSegments: 2, // Smoothness
-                    bevelEnabled: true, // Optional bevel
-                    bevelThickness: 2,
-                    bevelSize: 1,
-                    bevelSegments: 2,
-                });
-                const frontMaterial = new THREE.MeshPhongMaterial({
-                    color: "#FFD700",
-                });
-                const sideMaterial = new THREE.MeshPhongMaterial({
-                    color: "#2d2d2d",
-                });
-                const textMesh = new THREE.Mesh(textGeometry, [
-                    frontMaterial,
-                    sideMaterial,
-                ]);
-                textMesh.castShadow = true;
-                textMesh.position.set(-216, 80, 1290);
-                textMesh.rotation.y = -270;
-                textMesh.rotation.z = -270;
-                scene.add(textMesh);
-            });
             scene.add(sign);
         });
     };
 
+    const createBoardText = () => {
+        fontLoader.load("fonts/ibm_blex.typeface.json", (font) => {
+            const textGeometry = new TextGeometry("Projects", {
+                font: font,
+                size: 9, // Text size
+                depth: 2, // Depth (thickness)
+                curveSegments: 2, // Smoothness
+                bevelEnabled: true, // Optional bevel
+                bevelThickness: 2,
+                bevelSize: 1,
+                bevelSegments: 2,
+            });
+            const frontMaterial = new THREE.MeshPhongMaterial({
+                color: "#FFD700",
+            });
+            const sideMaterial = new THREE.MeshPhongMaterial({
+                color: "#2d2d2d",
+            });
+            const textMesh = new THREE.Mesh(textGeometry, [
+                frontMaterial,
+                sideMaterial,
+            ]);
+            textMesh.castShadow = true;
+            textMesh.position.set(-216, 80, 1290);
+            textMesh.rotation.y = -270;
+            textMesh.rotation.z = -270;
+            scene.add(textMesh);
+        });
+    };
+
     const initLamp = () => {
-        loader.load("models/lamp.glb", (gltf) => {
+        modelLoader.load("models/lamp.glb", (gltf) => {
             const lamp = gltf.scene;
             lamp.scale.set(6, 6, 6);
             lamp.position.set(-200, 0, 1350);
@@ -79,5 +81,11 @@ export const SetupWoodenSignModels = (scene) => {
         });
     };
 
-    return { initWoodenSignModels, initLamp };
+    const initWoodenBoardAndLamp = () => {
+        initWoodenSignModel();
+        initLamp();
+        createBoardText();
+    };
+
+    return { initWoodenBoardAndLamp };
 };

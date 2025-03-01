@@ -1,10 +1,10 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 export const SetupTreeModels = (scene) => {
-    const loader = new GLTFLoader();
+    const modelsLoader = new GLTFLoader();
 
     const loadTrees = () => {
-        loader.load(
+        modelsLoader.load(
             "models/pine-trees.glb",
             function (gltf) {
                 const tree = gltf.scene;
@@ -35,7 +35,7 @@ export const SetupTreeModels = (scene) => {
     };
 
     const loadTreeAndRocks = () => {
-        loader.load(
+        modelsLoader.load(
             "models/trees-rocks.glb",
             function (gltf) {
                 const treeAndRocks = gltf.scene;
@@ -79,10 +79,10 @@ export const SetupTreeModels = (scene) => {
         scene.add(treeAndRocks);
     };
 
-    const init = () => {
+    const initTreeAndTreeRocks = () => {
         loadTrees();
         loadTreeAndRocks();
     };
 
-    return { init };
+    return { initTreeAndTreeRocks };
 };

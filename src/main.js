@@ -1,12 +1,11 @@
 import { Init } from "./init";
 import { Lights } from "./lights";
-import { SetupTreeModels } from "./tree";
+import { SetupTreeModels } from "./trees";
 import { Snowfall } from "./snowfall";
 import { SnowPlane } from "./snow-plane";
 import { Animations } from "./animations";
 import { Text3D } from "./text";
 import { SetupWoodenSignModels } from "./wooden-signs";
-import * as THREE from "three";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -25,11 +24,10 @@ const { plane } = SnowPlane();
 scene.add(plane);
 
 /* Models */
-const { init } = SetupTreeModels(scene);
-const { initWoodenSignModels, initLamp } = SetupWoodenSignModels(scene);
-init();
-initWoodenSignModels();
-initLamp();
+const { initTreeAndTreeRocks } = SetupTreeModels(scene);
+const { initWoodenBoardAndLamp } = SetupWoodenSignModels(scene);
+initTreeAndTreeRocks();
+initWoodenBoardAndLamp();
 
 /* 3D text */
 const { createText } = Text3D(scene);
