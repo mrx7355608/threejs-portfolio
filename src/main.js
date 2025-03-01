@@ -4,6 +4,7 @@ import { SetupModels } from "./tree";
 import { Snowfall } from "./snowfall";
 import { SnowPlane } from "./snow-plane";
 import { Animations } from "./animations";
+import { Text3D } from "./text";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -25,6 +26,10 @@ scene.add(plane);
 const { init } = SetupModels(scene);
 init();
 
+/* 3D text */
+const { createText } = Text3D(scene);
+createText("Hello!");
+
 /* Animation Loop */
 renderer.setAnimationLoop(() => {
     snowfall.animateSnowfall();
@@ -33,7 +38,7 @@ renderer.setAnimationLoop(() => {
 });
 document.body.appendChild(renderer.domElement);
 document.addEventListener("wheel", (e) => {
-    camera.position.z -= e.deltaY / 100;
+    camera.position.z += e.deltaY / 100;
 });
 
 const { playIntroAnimation } = Animations(camera);
