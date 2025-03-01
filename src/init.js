@@ -3,8 +3,8 @@ import * as THREE from "three";
 export const Init = () => {
     const initScene = () => {
         const scene = new THREE.Scene();
-        scene.background = createGradientTexture("#9966CC", "#336699");
-        scene.fog = new THREE.FogExp2("#A9AADA", 0.0014);
+        scene.background = createGradientTexture("#ff9e9e", "#d8a1ff");
+        scene.fog = new THREE.FogExp2("#b38aff", 0.0014);
         return scene;
     };
 
@@ -23,9 +23,8 @@ export const Init = () => {
         const near = 1;
         const far = 20000;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.y = 1100;
-        camera.lookAt(0, 0, 0);
-        camera.position.x = 150;
+        camera.position.y = 50;
+        camera.position.x = 50;
         return camera;
     };
 
