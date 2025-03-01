@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 export const Lights = () => {
     const initDirectionalLight = () => {
-        const directionalLight = new THREE.DirectionalLight("#ff9966", 3);
+        const directionalLight = new THREE.DirectionalLight("#ff9966", 1);
         directionalLight.position.set(0, 700, -1500);
         directionalLight.castShadow = true;
 
@@ -20,7 +20,7 @@ export const Lights = () => {
         return directionalLight;
     };
 
-    const initAmbientLight = () => new THREE.AmbientLight("#fff", 0.4);
+    const initAmbientLight = () => new THREE.AmbientLight("#fff", 0.2);
 
     return {
         directional: initDirectionalLight(),
