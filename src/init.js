@@ -5,7 +5,7 @@ export const Init = () => {
         const scene = new THREE.Scene();
         scene.background = createGradientTexture("#ff9e9e", "#d8a1ff");
         scene.fog = new THREE.FogExp2("#F7CFE7", 0.0014);
-        scene.position.set(0, 0, -2300);
+        scene.position.set(0, 0, -2000);
         return scene;
     };
 

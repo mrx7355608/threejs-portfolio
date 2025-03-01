@@ -35,7 +35,7 @@ export const Text3D = (scene) => {
             ]);
             textMesh.castShadow = true;
 
-            textMesh.position.set(50, 70, -500);
+            textMesh.position.set(50, 70, 1700);
             textMesh.visible = false;
             scene.add(textMesh);
 

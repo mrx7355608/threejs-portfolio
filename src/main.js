@@ -47,6 +47,4 @@ document.addEventListener("wheel", (e) => {
     camera.position.z -= e.deltaY / 10;
 });
 
-// setTimeout(() => {
-//     playIntroAnimation();
-// }, 2000);
+playIntroAnimation();
