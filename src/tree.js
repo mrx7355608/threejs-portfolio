@@ -1,6 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const SetupModels = (scene) => {
+export const SetupTreeModels = (scene) => {
     const loader = new GLTFLoader();
 
     const loadTrees = () => {
@@ -16,14 +16,14 @@ export const SetupModels = (scene) => {
                 const clonedTree6 = tree.clone();
                 const clonedTree7 = tree.clone();
 
-                adjustTreeAndAddToScene(tree, -300, -300);
-                adjustTreeAndAddToScene(clonedTree1, -300, -500);
-                adjustTreeAndAddToScene(clonedTree2, -300, -700);
-                adjustTreeAndAddToScene(clonedTree3, -300, -900);
-                adjustTreeAndAddToScene(clonedTree4, -300, -1100);
-                adjustTreeAndAddToScene(clonedTree5, -300, -1300);
-                adjustTreeAndAddToScene(clonedTree6, -300, -1500);
-                adjustTreeAndAddToScene(clonedTree7, -300, -1700);
+                adjustTreeAndAddToScene(tree, -400, -300);
+                adjustTreeAndAddToScene(clonedTree1, -400, -500);
+                adjustTreeAndAddToScene(clonedTree2, -400, -700);
+                adjustTreeAndAddToScene(clonedTree3, -400, -1100);
+                adjustTreeAndAddToScene(clonedTree4, -400, -1500);
+                adjustTreeAndAddToScene(clonedTree5, -400, -1900);
+                adjustTreeAndAddToScene(clonedTree6, -400, -2400);
+                adjustTreeAndAddToScene(clonedTree7, -400, -2800);
 
                 scene.add(tree);
             },
@@ -56,7 +56,7 @@ export const SetupModels = (scene) => {
     };
 
     const adjustTreeAndAddToScene = (tree, x, z) => {
-        tree.position.set(x, 10, z);
+        tree.position.set(x, -10, z);
         tree.scale.set(200, 250, 220);
         tree.rotation.y = 100 * Math.random();
         tree.traverse((child) => {
@@ -68,7 +68,7 @@ export const SetupModels = (scene) => {
     };
 
     const adjustTreeRocksAndAddToScene = (treeAndRocks, x, z) => {
-        treeAndRocks.position.set(x, -10, z);
+        treeAndRocks.position.set(x, -20, z);
         treeAndRocks.scale.set(12, 14, 12);
         treeAndRocks.rotation.set(0, -Math.PI / 2, 0);
         treeAndRocks.traverse((child) => {
