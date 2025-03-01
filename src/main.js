@@ -5,7 +5,7 @@ import { Snowfall } from "./snowfall";
 import { SnowPlane } from "./snow-plane";
 import { Animations } from "./animations";
 import { Text3D } from "./text";
-import { SetupWoodenSignModels } from "./wooden-signs";
+import { SetupWoodenSignModels } from "./lamp";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -47,4 +47,4 @@ document.addEventListener("wheel", (e) => {
     camera.position.z -= e.deltaY / 10;
 });
 
-playIntroAnimation();
+setTimeout(playIntroAnimation, 2000);
