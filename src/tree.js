@@ -16,14 +16,14 @@ export const SetupTreeModels = (scene) => {
                 const clonedTree6 = tree.clone();
                 const clonedTree7 = tree.clone();
 
-                adjustTreeAndAddToScene(tree, -400, -300);
-                adjustTreeAndAddToScene(clonedTree1, -400, -500);
-                adjustTreeAndAddToScene(clonedTree2, -400, -700);
-                adjustTreeAndAddToScene(clonedTree3, -400, -1100);
-                adjustTreeAndAddToScene(clonedTree4, -400, -1500);
-                adjustTreeAndAddToScene(clonedTree5, -400, -1900);
-                adjustTreeAndAddToScene(clonedTree6, -400, -2400);
-                adjustTreeAndAddToScene(clonedTree7, -400, -2800);
+                adjustTreeAndAddToScene(tree, -400, 300);
+                adjustTreeAndAddToScene(clonedTree1, -400, 1500);
+                adjustTreeAndAddToScene(clonedTree2, -400, 2000);
+                adjustTreeAndAddToScene(clonedTree3, -400, 1100);
+                adjustTreeAndAddToScene(clonedTree4, -400, 700);
+                adjustTreeAndAddToScene(clonedTree5, -400, 400);
+                adjustTreeAndAddToScene(clonedTree6, -400, -100);
+                adjustTreeAndAddToScene(clonedTree7, -400, -400);
 
                 scene.add(tree);
             },
@@ -43,10 +43,10 @@ export const SetupTreeModels = (scene) => {
                 const clonedTreesAndRocks2 = treeAndRocks.clone();
                 const clonedTreesAndRocks3 = treeAndRocks.clone();
 
-                adjustTreeRocksAndAddToScene(treeAndRocks, 600, -500);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks1, 500, -1000);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 500, -1500);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 500, -2000);
+                adjustTreeRocksAndAddToScene(treeAndRocks, 600, 2000);
+                adjustTreeRocksAndAddToScene(clonedTreesAndRocks1, 500, 1200);
+                adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 500, 400);
+                adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 500, -600);
             },
             undefined,
             function (error) {

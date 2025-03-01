@@ -1,4 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import * as THREE from "three";
 
 export const SetupWoodenSignModels = (scene) => {
@@ -9,13 +11,42 @@ export const SetupWoodenSignModels = (scene) => {
             const sign = gltf.scene;
             sign.scale.set(60, 80, 80);
             sign.rotation.y = -270;
-            sign.position.set(-200, -10, -1350);
+            sign.position.set(-200, -10, 1280);
 
             sign.traverse((child) => {
                 if (child.isMesh) {
                     child.castShadow = true;
                     child.receiveShadow = true;
                 }
+            });
+
+            const loader2 = new FontLoader();
+            loader2.load("fonts/ibm_blex.typeface.json", (font) => {
+                const textGeometry = new TextGeometry("Projects", {
+                    font: font,
+                    size: 9, // Text size
+                    depth: 2, // Depth (thickness)
+                    curveSegments: 2, // Smoothness
+                    bevelEnabled: true, // Optional bevel
+                    bevelThickness: 2,
+                    bevelSize: 1,
+                    bevelSegments: 2,
+                });
+                const frontMaterial = new THREE.MeshPhongMaterial({
+                    color: "#FFD700",
+                });
+                const sideMaterial = new THREE.MeshPhongMaterial({
+                    color: "#2d2d2d",
+                });
+                const textMesh = new THREE.Mesh(textGeometry, [
+                    frontMaterial,
+                    sideMaterial,
+                ]);
+                textMesh.castShadow = true;
+                textMesh.position.set(-216, 80, 1290);
+                textMesh.rotation.y = -270;
+                textMesh.rotation.z = -270;
+                scene.add(textMesh);
             });
             scene.add(sign);
         });
@@ -25,7 +56,7 @@ export const SetupWoodenSignModels = (scene) => {
         loader.load("models/lamp.glb", (gltf) => {
             const lamp = gltf.scene;
             lamp.scale.set(6, 6, 6);
-            lamp.position.set(-200, 0, -1250);
+            lamp.position.set(-200, 0, 1350);
             lamp.castShadow = true;
 
             lamp.traverse((child) => {
@@ -34,15 +65,16 @@ export const SetupWoodenSignModels = (scene) => {
                     child.receiveShadow = true;
                 }
             });
-            const light = new THREE.PointLight(0xffcc88, 30000, 200);
-            light.position.set(
+
+            const lampLight = new THREE.PointLight("#FFB347", 30000, 200);
+            lampLight.position.set(
                 lamp.position.x + 30,
-                lamp.position.y + 60,
+                lamp.position.y + 80,
                 lamp.position.z,
             );
-            light.castShadow = true;
-            light.decay = 2;
-            scene.add(light);
+            lampLight.castShadow = true;
+            lampLight.decay = 2;
+            scene.add(lampLight);
             scene.add(lamp);
         });
     };
