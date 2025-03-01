@@ -46,7 +46,7 @@ renderer.setAnimationLoop(() => {
 });
 document.body.appendChild(renderer.domElement);
 document.addEventListener("wheel", (e) => {
-    camera.position.z += e.deltaY / 100;
+    camera.position.z -= e.deltaY / 10;
 });
 
 // setTimeout(() => {

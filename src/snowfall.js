@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-const numFlakes = 5000;
-const maxRange = 1000;
+const numFlakes = 15000;
+const maxRange = -5000;
 const minRange = maxRange / 2;
 const minHeight = 150;
 
