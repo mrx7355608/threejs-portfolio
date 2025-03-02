@@ -34,29 +34,18 @@ const { createText } = Text3D(scene);
 createText({
     text: "Hello! I am Fawad",
     size: 30,
-    frontColor: "#FFD700",
+    frontColor: "#f7cfe7",
     zPos: 1500,
     yPos: 50,
     xPos: -100,
 });
 createText({
-    text: "Nice to meet you",
-    size: 12,
-    frontColor: "#FFD700",
+    text: "A Fullstack Developer",
+    size: 13,
+    frontColor: "#f7cfe7",
     zPos: 1500,
     yPos: 30,
-    xPos: 100,
-});
-createText({
-    text: `I am a fullstack developer with over 2 years of  
-     hands-on experience in building large 
-                    and complex projects`,
-    size: 13,
-    frontColor: "#FFD700",
-    sidesColor: "#B8860B",
-    zPos: 700,
-    yPos: 80,
-    xPos: -80,
+    xPos: 50,
 });
 
 /* Animations */

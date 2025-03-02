@@ -16,14 +16,14 @@ export const SetupTreeModels = (scene) => {
                 const clonedTree6 = tree.clone();
                 const clonedTree7 = tree.clone();
 
-                adjustTreeAndAddToScene(tree, -400, 300);
-                adjustTreeAndAddToScene(clonedTree1, -400, 1500);
-                adjustTreeAndAddToScene(clonedTree2, -400, 2000);
-                adjustTreeAndAddToScene(clonedTree3, -400, 1100);
-                adjustTreeAndAddToScene(clonedTree4, -400, 700);
-                adjustTreeAndAddToScene(clonedTree5, -400, 400);
-                adjustTreeAndAddToScene(clonedTree6, -400, -100);
-                adjustTreeAndAddToScene(clonedTree7, -400, -400);
+                adjustTreeAndAddToScene(clonedTree1, -400, 1100);
+                adjustTreeAndAddToScene(clonedTree2, -400, 1500);
+                adjustTreeAndAddToScene(clonedTree3, -400, 700);
+                adjustTreeAndAddToScene(clonedTree4, -400, 300);
+                adjustTreeAndAddToScene(clonedTree5, -400, -100);
+                adjustTreeAndAddToScene(clonedTree6, -400, -500);
+                adjustTreeAndAddToScene(clonedTree7, -400, -900);
+                adjustTreeAndAddToScene(tree, -400, -1300);
 
                 scene.add(tree);
             },

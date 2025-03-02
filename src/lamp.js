@@ -8,9 +8,9 @@ export const SetupWoodenSignModels = (scene) => {
     const initLamp = () => {
         modelLoader.load("models/lamp.glb", (gltf) => {
             const lamp = gltf.scene;
-            const clonedLamp1 = lamp.clone();
+            // const clonedLamp1 = lamp.clone();
 
-            setupLampsAndLampsLight(lamp, 300, 800);
+            setupLampsAndLampsLight(lamp, 300, 750, true);
         });
     };
 
