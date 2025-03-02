@@ -5,7 +5,8 @@ import { Snowfall } from "./snowfall";
 import { SnowPlane } from "./snow-plane";
 import { Animations } from "./animations";
 import { Text3D } from "./text";
-import { SetupWoodenSignModels } from "./lamp";
+import { SetupLampModel } from "./lamp";
+import { SetupWoodenBoard } from "./wooden-board";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -25,9 +26,12 @@ scene.add(plane);
 
 /* Models */
 const { initTreeAndTreeRocks } = SetupTreeModels(scene);
-const { initLamp } = SetupWoodenSignModels(scene);
+const { initLamp, initStreetLamp } = SetupLampModel(scene);
+const { loadWoodenBoardModel } = SetupWoodenBoard(scene);
 initLamp();
+initStreetLamp();
 initTreeAndTreeRocks();
+loadWoodenBoardModel();
 
 /* 3D text */
 const { createText } = Text3D(scene);

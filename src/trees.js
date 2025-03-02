@@ -15,6 +15,9 @@ export const SetupTreeModels = (scene) => {
                 const clonedTree5 = tree.clone();
                 const clonedTree6 = tree.clone();
                 const clonedTree7 = tree.clone();
+                const clonedTree8 = tree.clone();
+                const clonedTree9 = tree.clone();
+                const clonedTree10 = tree.clone();
 
                 adjustTreeAndAddToScene(clonedTree1, -400, 1100);
                 adjustTreeAndAddToScene(clonedTree2, -400, 1500);
@@ -23,6 +26,9 @@ export const SetupTreeModels = (scene) => {
                 adjustTreeAndAddToScene(clonedTree5, -400, -100);
                 adjustTreeAndAddToScene(clonedTree6, -400, -500);
                 adjustTreeAndAddToScene(clonedTree7, -400, -900);
+                adjustTreeAndAddToScene(clonedTree8, -400, -1300);
+                adjustTreeAndAddToScene(clonedTree9, -400, -1700);
+                adjustTreeAndAddToScene(clonedTree10, -400, -2000);
                 adjustTreeAndAddToScene(tree, -400, -1300);
 
                 scene.add(tree);
