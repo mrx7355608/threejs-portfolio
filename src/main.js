@@ -6,7 +6,8 @@ import { SnowPlane } from "./snow-plane";
 import { Animations } from "./animations";
 import { Text3D } from "./text";
 import { SetupLampModel } from "./lamp";
-import { SetupWoodenBoard } from "./wooden-board";
+import { SetupSkillBoards } from "./skill-boards";
+import { Projects } from "./projects";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -27,11 +28,11 @@ scene.add(plane);
 /* Models */
 const { initTreeAndTreeRocks } = SetupTreeModels(scene);
 const { initLamp, initStreetLamp } = SetupLampModel(scene);
-const { loadWoodenBoardModel } = SetupWoodenBoard(scene);
+const { createSkillBoards } = SetupSkillBoards(scene);
 initLamp();
 initStreetLamp();
 initTreeAndTreeRocks();
-loadWoodenBoardModel();
+createSkillBoards();
 
 /* 3D text */
 const { createText } = Text3D(scene);
@@ -52,6 +53,9 @@ createText({
     xPos: 50,
 });
 
+const { addProjectsToScene } = Projects(scene);
+addProjectsToScene();
+
 /* Animations */
 const { playIntroAnimation } = Animations(camera, scene);
 
@@ -66,4 +70,4 @@ document.addEventListener("wheel", (e) => {
     camera.position.z -= e.deltaY / 10;
 });
 
-setTimeout(playIntroAnimation, 2000);
+// setTimeout(playIntroAnimation, 2000);
