@@ -10,8 +10,8 @@ export const SetupLampModel = (scene) => {
             const lamp = gltf.scene;
             const lamp1 = lamp.clone();
 
-            setupKeroseneLampAndLampsLight(lamp, -200, 450);
-            setupKeroseneLampAndLampsLight(lamp1, 270, -400);
+            setupKeroseneLampAndLampsLight(lamp, -150, 450);
+            setupKeroseneLampAndLampsLight(lamp1, 250, -300);
         });
     };
 

@@ -22,7 +22,7 @@ export const SetupTreeModels = (scene) => {
                 adjustTreeAndAddToScene(clonedTree1, -400, 1100);
                 adjustTreeAndAddToScene(clonedTree2, -400, 1500);
                 adjustTreeAndAddToScene(clonedTree3, -400, 700);
-                adjustTreeAndAddToScene(clonedTree4, -400, 300);
+                adjustTreeAndAddToScene(clonedTree4, -400, 200);
                 adjustTreeAndAddToScene(clonedTree5, -400, -100);
                 adjustTreeAndAddToScene(clonedTree6, -400, -500);
                 adjustTreeAndAddToScene(clonedTree7, -400, -900);
