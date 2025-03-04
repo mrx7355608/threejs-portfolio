@@ -8,6 +8,7 @@ import { Text3D } from "./text";
 import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
+import { createGroundText } from "./ground-text";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -58,6 +59,9 @@ addProjectsToScene();
 
 /* Animations */
 const { playIntroAnimation } = Animations(camera, scene);
+
+createGroundText({ scene, text: "S K I L L S", zPos: 800 });
+createGroundText({ scene, text: "P R O J E C T S", zPos: -800 });
 
 /* Animation Loop */
 renderer.setAnimationLoop(() => {
