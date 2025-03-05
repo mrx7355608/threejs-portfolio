@@ -30,7 +30,7 @@ export const Intro = (scene) => {
         createText({
             text: "Hi! I am Fawad",
             size: 30,
-            frontColor: "red",
+            frontColor: "#8B2E2E",
             zPos: 1500,
             yPos: 50,
             xPos: -100,
@@ -38,7 +38,7 @@ export const Intro = (scene) => {
         createText({
             text: "A Fullstack Developer",
             size: 13,
-            frontColor: "#f7cfe7",
+            frontColor: "#8b2e2e",
             zPos: 1500,
             yPos: 30,
             xPos: 50,

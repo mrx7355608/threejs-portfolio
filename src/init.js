@@ -4,7 +4,7 @@ export const Init = () => {
     const initScene = () => {
         const scene = new THREE.Scene();
         scene.background = createGradientTexture("#ff9e9e", "#453a40");
-        scene.fog = new THREE.FogExp2("#D0ADAF", 0.0014);
+        scene.fog = new THREE.FogExp2("#D0ADAF", 0.0017);
         scene.position.set(0, 0, 700);
         return scene;
     };
@@ -25,15 +25,15 @@ export const Init = () => {
         const near = 1;
         const far = 20000;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.y = 80;
-        camera.position.z = 200;
-        camera.position.x = 80;
+        // camera.position.y = 80;
+        // camera.position.z = 200;
+        // camera.position.x = 80;
 
         /* Used for animations */
-        // camera.position.y = 1200;
-        // camera.lookAt(0, 0, 0);
-        // camera.position.x = 100;
-        // camera.position.z = 0;
+        camera.position.y = 1200;
+        camera.lookAt(0, 0, 0);
+        camera.position.x = 80;
+        camera.position.z = 2800;
 
         return camera;
     };

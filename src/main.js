@@ -9,6 +9,7 @@ import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
 import gsap from "gsap";
+import { loadingManager } from "./loadingManager";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -45,11 +46,21 @@ createSkillBoards();
 const { addProjectsToScene } = Projects(scene, camera);
 addProjectsToScene();
 
+/* Add scroll event listener */
+document.body.appendChild(renderer.domElement);
+document.addEventListener("wheel", (e) => {
+    if (camera.position.z <= -250) {
+        camera.position.x += e.deltaY / 10;
+        return;
+    }
+    camera.position.z -= e.deltaY / 10;
+});
+
 /* Animations */
 const { playIntroAnimation } = Animations(camera, scene);
 
 /* Animation Loop */
-renderer.setAnimationLoop(() => {
+const animate = () => {
     snowfall.animateSnowfall();
     camera.updateProjectionMatrix();
 
@@ -60,16 +71,14 @@ renderer.setAnimationLoop(() => {
             ease: "power2.out",
         });
     }
-
     renderer.render(scene, camera);
-});
-document.body.appendChild(renderer.domElement);
-document.addEventListener("wheel", (e) => {
-    if (camera.position.z <= -250) {
-        camera.position.x += e.deltaY / 10;
-        return;
-    }
-    camera.position.z -= e.deltaY / 10;
-});
+};
 
-// setTimeout(playIntroAnimation, 4000);
+loadingManager.onProgress = function (url, loaded, total) {
+    console.log(`Loading file: ${url} (${loaded} of ${total})`);
+};
+loadingManager.onLoad = () => {
+    document.getElementById("loading-screen").style.display = "none";
+    setTimeout(playIntroAnimation, 800);
+    renderer.setAnimationLoop(animate);
+};

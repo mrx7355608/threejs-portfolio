@@ -12,9 +12,9 @@ export const Lights = () => {
         directionalLight.shadow.camera.top = 2500;
         directionalLight.shadow.camera.bottom = -2500;
         directionalLight.shadow.camera.near = 1;
-        directionalLight.shadow.camera.far = 10000;
-        directionalLight.shadow.mapSize.width = 2048;
-        directionalLight.shadow.mapSize.height = 2048;
+        directionalLight.shadow.camera.far = 5000;
+        directionalLight.shadow.mapSize.width = 2048 * 2;
+        directionalLight.shadow.mapSize.height = 2048 * 2;
         directionalLight.intensity = 5;
 
         return directionalLight;
