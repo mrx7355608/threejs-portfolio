@@ -26,8 +26,8 @@ export const SetupTreeModels = (scene) => {
                 adjustTreeAndAddToScene(clonedTree5, -400, -100);
                 adjustTreeAndAddToScene(clonedTree6, -400, -500);
                 adjustTreeAndAddToScene(clonedTree7, -400, -900);
-                adjustTreeAndAddToScene(clonedTree8, -400, -1300);
-                adjustTreeAndAddToScene(clonedTree9, -400, -1700);
+                adjustTreeAndAddToScene(clonedTree8, -300, -1600, true);
+                adjustTreeAndAddToScene(clonedTree9, 100, -1700, true);
                 adjustTreeAndAddToScene(clonedTree10, -400, -2000);
                 adjustTreeAndAddToScene(tree, -400, -1300);
 
@@ -49,10 +49,10 @@ export const SetupTreeModels = (scene) => {
                 const clonedTreesAndRocks2 = treeAndRocks.clone();
                 const clonedTreesAndRocks3 = treeAndRocks.clone();
 
-                adjustTreeRocksAndAddToScene(treeAndRocks, 600, 2000);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks1, 500, 1200);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 500, 400);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 500, -600);
+                adjustTreeRocksAndAddToScene(treeAndRocks, 500, 1200);
+                adjustTreeRocksAndAddToScene(clonedTreesAndRocks1, 600, 500);
+                adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 600, -300);
+                adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 600, -1600);
             },
             undefined,
             function (error) {
@@ -61,7 +61,7 @@ export const SetupTreeModels = (scene) => {
         );
     };
 
-    const adjustTreeAndAddToScene = (tree, x, z) => {
+    const adjustTreeAndAddToScene = (tree, x, z, rotateY = false) => {
         tree.position.set(x, -10, z);
         tree.scale.set(200, 250, 220);
         tree.rotation.y = 100 * Math.random();
@@ -70,6 +70,9 @@ export const SetupTreeModels = (scene) => {
                 child.castShadow = true;
             }
         });
+        if (rotateY) {
+            tree.rotation.y = 30;
+        }
         scene.add(tree);
     };
 

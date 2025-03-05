@@ -23,7 +23,7 @@ export const SetupLampModel = (scene) => {
 
             setupStreetLamp(lamp, 300, 450);
             setupStreetLamp(lamp2, -200, -250, true);
-            setupStreetLamp(lamp3, 250, -1000);
+            setupStreetLamp(lamp3, 700, -800);
             // setupStreetLamp(lamp4, 300, 1600, true);
         });
     };
@@ -65,7 +65,7 @@ export const SetupLampModel = (scene) => {
     };
 
     const setupStreetLamp = (lamp, x, z, enableFlicker = false) => {
-        lamp.scale.set(8, 8, 5);
+        lamp.scale.set(8, 8, 8);
         lamp.position.set(x, 0, z);
 
         lamp.traverse((child) => {
