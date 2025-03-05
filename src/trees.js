@@ -14,8 +14,6 @@ export const SetupTreeModels = (scene) => {
                 const clonedTree6 = tree.clone();
                 const clonedTree7 = tree.clone();
                 const clonedTree8 = tree.clone();
-                const clonedTree9 = tree.clone();
-                const clonedTree10 = tree.clone();
 
                 adjustTreeAndAddToScene(clonedTree1, -400, 1100);
                 adjustTreeAndAddToScene(clonedTree2, -400, 1500);
@@ -24,10 +22,8 @@ export const SetupTreeModels = (scene) => {
                 adjustTreeAndAddToScene(clonedTree5, -400, -100);
                 adjustTreeAndAddToScene(clonedTree6, -400, -500);
                 adjustTreeAndAddToScene(clonedTree7, -400, -900);
-                adjustTreeAndAddToScene(clonedTree8, -300, -1600, true);
-                adjustTreeAndAddToScene(clonedTree9, 100, -1700, true);
-                adjustTreeAndAddToScene(clonedTree10, -400, -2000);
-                adjustTreeAndAddToScene(tree, -400, -1300);
+                adjustTreeAndAddToScene(clonedTree8, -150, -1300, true);
+                adjustTreeAndAddToScene(tree, 400, -1400, true);
 
                 scene.add(tree);
             },
@@ -49,8 +45,8 @@ export const SetupTreeModels = (scene) => {
 
                 adjustTreeRocksAndAddToScene(treeAndRocks, 500, 1200);
                 adjustTreeRocksAndAddToScene(clonedTreesAndRocks1, 600, 500);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 600, -300);
-                adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 600, -1600);
+                // adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 600, -300);
+                // adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 600, -1600);
             },
             undefined,
             function (error) {

@@ -4,7 +4,7 @@ export const Init = () => {
     const initScene = () => {
         const scene = new THREE.Scene();
         scene.background = createGradientTexture("#ff9e9e", "#453a40");
-        scene.fog = new THREE.FogExp2("#D0ADAF", 0.0017);
+        scene.fog = new THREE.FogExp2("#D0ADAF", 0.0019);
         scene.position.set(0, 0, 700);
         return scene;
     };
@@ -15,7 +15,6 @@ export const Init = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        renderer.shadowMap.autoUpdate = true;
         return renderer;
     };
 
@@ -23,7 +22,7 @@ export const Init = () => {
         const fov = 60;
         const aspect = window.innerWidth / window.innerHeight;
         const near = 1;
-        const far = 20000;
+        const far = 2000;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
         // camera.position.y = 80;
         // camera.position.z = 200;

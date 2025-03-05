@@ -50,38 +50,32 @@ addProjectsToScene();
 /* Add scroll event listener */
 document.body.appendChild(renderer.domElement);
 document.addEventListener("wheel", (e) => {
-    if (camera.position.z <= -250) {
+    if (camera.position.z <= -200) {
         camera.position.x += e.deltaY / 10;
+        camera.updateProjectionMatrix();
         return;
     }
+    camera.updateProjectionMatrix();
     camera.position.z -= e.deltaY / 10;
 });
 
 /* Animations */
-const { playIntroAnimation } = Animations(camera, scene);
+const { playIntroAnimation, playRotationAnimation } = Animations(camera, scene);
 
 /* Animation Loop */
 const animate = () => {
     snowfall.animateSnowfall();
-    camera.updateProjectionMatrix();
 
-    if (camera.position.z < -250) {
-        gsap.to(camera.rotation, {
-            y: -Math.PI / 2,
-            duration: 2,
-            ease: "power2.out",
-        });
+    if (camera.position.z < -200) {
+        playRotationAnimation();
     }
     renderer.render(scene, camera);
 };
 
-loadingManager.onProgress = function (url, loaded, total) {
-    console.log(`Loading file: ${url} (${loaded} of ${total})`);
-};
 loadingManager.onLoad = () => {
     document.getElementById("loading-screen").style.display = "none";
-    setTimeout(playIntroAnimation, 1000);
     renderer.setAnimationLoop(animate);
+    setTimeout(playIntroAnimation, 1000);
 };
 
 getEvents().addEventListener("intro-animation-complete", () => {

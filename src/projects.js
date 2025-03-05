@@ -3,7 +3,7 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { fontLoader, modelsLoader, textureLoader } from "./loaders";
 
 export const Projects = (scene, camera) => {
-    const aspect = 1306 / 581;
+    const aspect = 1920 / 1080;
     const PLANE_WIDTH = 300;
     const PLANE_HEIGHT = PLANE_WIDTH / aspect;
 
@@ -31,14 +31,14 @@ export const Projects = (scene, camera) => {
     const createImagePlane = ({ previewImage, position, yRotation }) => {
         const geom = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT);
         const texture = textureLoader.load(previewImage);
-        const material = new THREE.MeshBasicMaterial({
+        const material = new THREE.MeshPhongMaterial({
             map: texture,
-            transparent: true,
         });
         const mesh = new THREE.Mesh(geom, material);
         mesh.position.copy(position);
         mesh.castShadow = true;
         mesh.rotation.y = yRotation;
+        mesh.rotation.x = -Math.PI / 12;
         scene.add(mesh);
     };
 
@@ -144,7 +144,7 @@ export const Projects = (scene, camera) => {
         //     previewImage: "textures/projects/chatapplication.png",
         //     code: "https://github.com/mrx7355608/chatapplication",
         //     demo: null,
-        //     position: new THREE.Vector3(50, 110, -1100),
+        //     position: new THREE.Vector3(50, 90, -1100),
         //     first: true,
         // });
         createProject({
@@ -153,7 +153,7 @@ export const Projects = (scene, camera) => {
             previewImage: "textures/projects/linux-rice.png",
             code: "https://github.com/mrx7355608/dotfiles",
             demo: null,
-            position: new THREE.Vector3(50, 110, -1100),
+            position: new THREE.Vector3(50, 90, -1100),
             yRotation: 0,
         });
         createProject({
@@ -162,7 +162,7 @@ export const Projects = (scene, camera) => {
             previewImage: "textures/projects/medium-clone.png",
             code: "https://github.com/mrx7355608/chatapplication",
             demo: null,
-            position: new THREE.Vector3(1100, 110, -900),
+            position: new THREE.Vector3(1100, 90, -900),
         });
         createProject({
             title: "Facebook clone",
@@ -170,7 +170,7 @@ export const Projects = (scene, camera) => {
             previewImage: "textures/projects/facebook-clone.png",
             code: "https://github.com/mrx7355608/chatapplication",
             demo: null,
-            position: new THREE.Vector3(1500, 110, -900),
+            position: new THREE.Vector3(1500, 90, -900),
         });
     };
 
