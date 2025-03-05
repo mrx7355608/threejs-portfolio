@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 
-export const SnowPlane = () => {
+export const SnowPlane = (scene) => {
     const loader = new FontLoader();
 
     const initPlane = () => {
@@ -15,14 +15,17 @@ export const SnowPlane = () => {
         /* Config */
         geometry.rotateX(-Math.PI / 2);
         mesh.receiveShadow = true;
+        scene.add(mesh);
+    };
+
+    const displayPlane = () => {
+        initPlane();
         createGroundText({ text: "S K I L L S", zPos: 800, xPos: 0 });
         createGroundText({
             text: "P R O J E C T S",
-            zPos: -800,
+            zPos: -400,
             xPos: -50,
         });
-
-        return mesh;
     };
 
     const createGroundText = ({ text, zPos, xPos }) => {
@@ -49,10 +52,9 @@ export const SnowPlane = () => {
             textMesh.castShadow = true;
             textMesh.receiveShadow = true;
             textMesh.position.set(xPos, -6, zPos);
-            textMesh.visible = true;
             scene.add(textMesh);
         });
     };
 
-    return { plane: initPlane() };
+    return { displayPlane };
 };

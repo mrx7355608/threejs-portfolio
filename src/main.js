@@ -8,7 +8,7 @@ import { Intro } from "./intro";
 import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
-import { createGroundText } from "./ground-text";
+import gsap from "gsap";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -23,8 +23,8 @@ const snowfall = Snowfall();
 scene.add(snowfall.snowfall);
 
 /* Plane */
-const { plane } = SnowPlane();
-scene.add(plane);
+const { displayPlane } = SnowPlane(scene);
+displayPlane();
 
 /* Models */
 const { initTreeAndTreeRocks } = SetupTreeModels(scene);
@@ -52,10 +52,23 @@ const { playIntroAnimation } = Animations(camera, scene);
 renderer.setAnimationLoop(() => {
     snowfall.animateSnowfall();
     camera.updateProjectionMatrix();
+
+    if (camera.position.z < -250) {
+        gsap.to(camera.rotation, {
+            y: -Math.PI / 2,
+            duration: 2,
+            ease: "power2.out",
+        });
+    }
+
     renderer.render(scene, camera);
 });
 document.body.appendChild(renderer.domElement);
 document.addEventListener("wheel", (e) => {
+    if (camera.position.z <= -250) {
+        camera.position.x += e.deltaY / 10;
+        return;
+    }
     camera.position.z -= e.deltaY / 10;
 });
 

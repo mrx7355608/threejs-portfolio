@@ -26,7 +26,7 @@ export const Init = () => {
         const far = 20000;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
         camera.position.y = 80;
-        camera.position.z = -200;
+        camera.position.z = 200;
         camera.position.x = 80;
 
         /* Used for animations */
