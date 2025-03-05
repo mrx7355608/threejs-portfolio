@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { textureLoader } from "./loaders";
 
 const numFlakes = 15000;
 const maxRange = -5000;
@@ -34,9 +35,7 @@ export const Snowfall = () => {
         geom.setAttribute("position", pos);
         geom.setAttribute("velocity", vels);
 
-        const texture = new THREE.TextureLoader().load(
-            "textures/snow/snow-ball.png",
-        );
+        const texture = textureLoader.load("textures/snow/snow-ball.png");
         const material = new THREE.PointsMaterial({
             map: texture,
             size: 2,

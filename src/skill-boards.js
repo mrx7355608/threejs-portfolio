@@ -1,9 +1,7 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { modelsLoader, textureLoader } from "./loaders";
 
 export const SetupSkillBoards = (scene) => {
-    const modelsLoader = new GLTFLoader();
-    const textureLoader = new THREE.TextureLoader();
     const PLANE_WIDTH = 52;
     const PLANE_HEIGHT = 20;
 

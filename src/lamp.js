@@ -1,12 +1,10 @@
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import * as THREE from "three";
 import { getEvents } from "./events";
+import { modelsLoader } from "./loaders";
 
 export const SetupLampModel = (scene) => {
-    const modelLoader = new GLTFLoader();
-
     const initLamp = () => {
-        modelLoader.load("models/kerosene-lamp.glb", (gltf) => {
+        modelsLoader.load("models/kerosene-lamp.glb", (gltf) => {
             const lamp = gltf.scene;
             const lamp1 = lamp.clone();
 
@@ -15,7 +13,7 @@ export const SetupLampModel = (scene) => {
     };
 
     const initStreetLamp = () => {
-        modelLoader.load("models/street-lamp.glb", (gltf) => {
+        modelsLoader.load("models/street-lamp.glb", (gltf) => {
             const lamp = gltf.scene;
             const lamp2 = lamp.clone();
             const lamp3 = lamp.clone();

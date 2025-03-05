@@ -1,16 +1,12 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { fontLoader, modelsLoader, textureLoader } from "./loaders";
 
 export const Projects = (scene, camera) => {
     const aspect = 1306 / 581;
     const PLANE_WIDTH = 300;
     const PLANE_HEIGHT = PLANE_WIDTH / aspect;
 
-    const modelsLoader = new GLTFLoader();
-    const textureLoader = new THREE.TextureLoader();
-    const loader = new FontLoader();
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -59,7 +55,7 @@ export const Projects = (scene, camera) => {
             throw new Error("Stack text is missing");
         }
 
-        loader.load("fonts/ibm_blex.typeface.json", (font) => {
+        fontLoader.load("fonts/ibm_blex.typeface.json", (font) => {
             /* Title text */
             const titleTextGeom = new TextGeometry(title, {
                 font: font,

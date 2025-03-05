@@ -1,16 +1,14 @@
 import * as THREE from "three";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { fontLoader } from "./loaders";
 
 export const Intro = (scene) => {
-    const loader = new FontLoader();
-
     const createText = ({ text, size, frontColor, zPos, yPos, xPos }) => {
         if (!text) {
             throw new Error("No text provided");
         }
 
-        loader.load("fonts/ibm_blex.typeface.json", (font) => {
+        fontLoader.load("fonts/ibm_blex.typeface.json", (font) => {
             const textGeometry = new TextGeometry(text, {
                 font: font,
                 size: size,

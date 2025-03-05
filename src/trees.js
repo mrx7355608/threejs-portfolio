@@ -1,8 +1,6 @@
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { modelsLoader } from "./loaders";
 
 export const SetupTreeModels = (scene) => {
-    const modelsLoader = new GLTFLoader();
-
     const loadTrees = () => {
         modelsLoader.load(
             "models/pine-trees.glb",

@@ -1,10 +1,8 @@
 import * as THREE from "three";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { fontLoader } from "./loaders";
 
 export const SnowPlane = (scene) => {
-    const loader = new FontLoader();
-
     const initPlane = () => {
         const geometry = new THREE.PlaneGeometry(5000, 6500, 128, 128);
         const material = new THREE.MeshPhongMaterial({
@@ -33,7 +31,7 @@ export const SnowPlane = (scene) => {
             throw new Error("No text provided");
         }
 
-        loader.load("fonts/ibm_blex.typeface.json", (font) => {
+        fontLoader.load("fonts/ibm_blex.typeface.json", (font) => {
             const textGeometry = new TextGeometry(text, {
                 font: font,
                 size: 25,
