@@ -29,15 +29,17 @@ scene.add(plane);
 /* Models */
 const { initTreeAndTreeRocks } = SetupTreeModels(scene);
 const { initLamp, initStreetLamp } = SetupLampModel(scene);
-const { createSkillBoards } = SetupSkillBoards(scene);
 initLamp();
 initStreetLamp();
 initTreeAndTreeRocks();
-createSkillBoards();
 
 /* Intro */
 const { showIntro } = Intro(scene);
 showIntro();
+
+/* Skills */
+const { createSkillBoards } = SetupSkillBoards(scene);
+createSkillBoards();
 
 /* Projects */
 const { addProjectsToScene } = Projects(scene, camera);
@@ -45,9 +47,6 @@ addProjectsToScene();
 
 /* Animations */
 const { playIntroAnimation } = Animations(camera, scene);
-
-createGroundText({ scene, text: "S K I L L S", zPos: 800, xPos: 0 });
-createGroundText({ scene, text: "P R O J E C T S", zPos: -800, xPos: -50 });
 
 /* Animation Loop */
 renderer.setAnimationLoop(() => {
