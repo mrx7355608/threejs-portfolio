@@ -10,6 +10,7 @@ import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
 import gsap from "gsap";
 import { loadingManager } from "./loadingManager";
+import { getEvents } from "./events";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -79,6 +80,13 @@ loadingManager.onProgress = function (url, loaded, total) {
 };
 loadingManager.onLoad = () => {
     document.getElementById("loading-screen").style.display = "none";
-    setTimeout(playIntroAnimation, 800);
+    setTimeout(playIntroAnimation, 1000);
     renderer.setAnimationLoop(animate);
 };
+
+getEvents().addEventListener("intro-animation-complete", () => {
+    const elem = document.getElementById("tip-screen");
+    elem.style.display = "flex";
+
+    setTimeout(() => (elem.style.display = "none"), 5000);
+});

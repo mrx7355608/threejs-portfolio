@@ -4,9 +4,15 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/vite.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite App</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <title>Fawad Imran | Portfolio</title>
     </head>
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
         * {
             padding: 0;
             margin: 0;
@@ -60,11 +66,36 @@
             animation: l4 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
         }
 
-        #tip {
+        #tip-screen {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             position: fixed;
             bottom: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        #tip {
             font-weight: bold;
             margin: 20px 0px;
+            font-family: "IBM Plex Sans";
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        .blinking-text {
+            animation: blink 1.5s infinite ease-in-out;
         }
 
         @keyframes l4 {
@@ -81,6 +112,10 @@
     <body>
         <div id="loading-screen">
             <div class="loader"></div>
+        </div>
+        <div id="tip-screen" class="blinking-text">
+            <i class="fa-solid fa-computer-mouse"></i>
+            <p id="tip">Scroll to explore</p>
         </div>
 
         <div id="app"></div>
