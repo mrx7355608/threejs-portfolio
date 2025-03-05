@@ -3,9 +3,9 @@ import * as THREE from "three";
 export const Init = () => {
     const initScene = () => {
         const scene = new THREE.Scene();
-        scene.background = createGradientTexture("#29181c", "#40232a");
-        scene.fog = new THREE.FogExp2("#7D5F68", 0.0014);
-        scene.position.set(0, 0, -2000);
+        scene.background = createGradientTexture("#ff9e9e", "#453a40");
+        scene.fog = new THREE.FogExp2("#D0ADAF", 0.0014);
+        scene.position.set(0, 0, 700);
         return scene;
     };
 

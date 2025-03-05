@@ -2,25 +2,24 @@ import * as THREE from "three";
 
 export const Lights = () => {
     const initDirectionalLight = () => {
-        const directionalLight = new THREE.DirectionalLight("#7D5F68", 2);
-        directionalLight.position.set(200, 800, -2000);
+        const directionalLight = new THREE.DirectionalLight("#ff9966", 0.3);
+        directionalLight.position.set(200, 400, -1500);
         directionalLight.castShadow = true;
 
         /* Shadow configurations */
-        directionalLight.shadow.camera.left = -600;
-        directionalLight.shadow.camera.right = 600;
-        directionalLight.shadow.camera.top = 300;
-        directionalLight.shadow.camera.bottom = -600;
+        directionalLight.shadow.camera.left = -2500;
+        directionalLight.shadow.camera.right = 2500;
+        directionalLight.shadow.camera.top = 2500;
+        directionalLight.shadow.camera.bottom = -2500;
         directionalLight.shadow.camera.near = 1;
-        directionalLight.shadow.camera.far = 5000;
+        directionalLight.shadow.camera.far = 10000;
         directionalLight.shadow.mapSize.width = 2048;
         directionalLight.shadow.mapSize.height = 2048;
-        directionalLight.intensity = 3;
+        directionalLight.intensity = 5;
 
         return directionalLight;
     };
-
-    const initAmbientLight = () => new THREE.AmbientLight("#AB99B3", 0.1);
+    const initAmbientLight = () => new THREE.AmbientLight("#fff", 0.4);
 
     return {
         directional: initDirectionalLight(),

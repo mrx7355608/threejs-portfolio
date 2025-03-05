@@ -40,7 +40,7 @@ const { createText } = Text3D(scene);
 createText({
     text: "Hi! I am Fawad",
     size: 30,
-    frontColor: "#f7cfe7",
+    frontColor: "red",
     zPos: 1500,
     yPos: 50,
     xPos: -100,
@@ -74,4 +74,4 @@ document.addEventListener("wheel", (e) => {
     camera.position.z -= e.deltaY / 10;
 });
 
-setTimeout(playIntroAnimation, 4000);
+// setTimeout(playIntroAnimation, 4000);

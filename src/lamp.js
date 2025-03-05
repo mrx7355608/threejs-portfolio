@@ -11,7 +11,6 @@ export const SetupLampModel = (scene) => {
             const lamp1 = lamp.clone();
 
             setupKeroseneLampAndLampsLight(lamp, -150, 450);
-            setupKeroseneLampAndLampsLight(lamp1, 250, -300);
         });
     };
 
@@ -24,8 +23,8 @@ export const SetupLampModel = (scene) => {
 
             setupStreetLamp(lamp, 300, 450);
             setupStreetLamp(lamp2, -200, -250, true);
-            setupStreetLamp(lamp3, -100, 1600, true);
-            setupStreetLamp(lamp4, 300, 1600, true);
+            setupStreetLamp(lamp3, 250, -1000);
+            // setupStreetLamp(lamp4, 300, 1600, true);
         });
     };
 
@@ -46,10 +45,10 @@ export const SetupLampModel = (scene) => {
             }
         });
 
-        const lampLight = new THREE.PointLight("#FFB347", 10000);
+        const lampLight = new THREE.PointLight("#FFB347", 30000);
         lampLight.position.set(
             x < 0 ? x + 10 : x - 10,
-            lamp.position.y + 10,
+            lamp.position.y + 20,
             lamp.position.z,
         );
         lampLight.castShadow = true;
@@ -76,7 +75,7 @@ export const SetupLampModel = (scene) => {
             }
         });
 
-        const lampLight = new THREE.PointLight("#FFB347", 80000, 1000);
+        const lampLight = new THREE.PointLight("#FFB347", 60000);
         lampLight.position.set(
             x < 0 ? x + 50 : x - 50,
             lamp.position.y + 100,

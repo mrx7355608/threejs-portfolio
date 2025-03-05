@@ -6,21 +6,24 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 export const Projects = (scene, camera) => {
     const modelsLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
-    const PLANE_WIDTH = 200;
-    const PLANE_HEIGHT = 110;
+    const aspect = 1306 / 581;
+    const PLANE_WIDTH = 300;
+    const PLANE_HEIGHT = PLANE_WIDTH / aspect;
     const loader = new FontLoader();
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
     const createImagePlane = () => {
         const geom = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT);
-        const texture = textureLoader.load("textures/snow/diffuse.png");
-        const material = new THREE.MeshStandardMaterial({
-            color: "white",
+        const texture = textureLoader.load(
+            "textures/projects/medium-clone.png",
+        );
+        const material = new THREE.MeshBasicMaterial({
             map: texture,
+            transparent: true,
         });
         const mesh = new THREE.Mesh(geom, material);
-        mesh.position.set(10, 120, -1100);
+        mesh.position.set(50, 120, -1130);
         mesh.castShadow = true;
         createText({
             text: "CHAT APPLICATION",
@@ -82,7 +85,7 @@ export const Projects = (scene, camera) => {
                 size: size,
                 depth: 0,
             });
-            const frontMaterial = new THREE.MeshPhongMaterial({
+            const frontMaterial = new THREE.MeshBasicMaterial({
                 color: frontColor,
             });
             const textMesh = new THREE.Mesh(textGeometry, frontMaterial);
@@ -90,7 +93,7 @@ export const Projects = (scene, camera) => {
             textMesh.receiveShadow = true;
             textMesh.position.set(xPos, yPos, zPos);
             textMesh.visible = true;
-            textMesh.userData.text = text;
+            // textMesh.userData.text = text;
             scene.add(textMesh);
 
             window.addEventListener("click", (event) => {
