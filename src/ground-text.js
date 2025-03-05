@@ -3,7 +3,7 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 
 const loader = new FontLoader();
-export const createGroundText = ({ scene, text, zPos }) => {
+export const createGroundText = ({ scene, text, zPos, xPos }) => {
     if (!text) {
         throw new Error("No text provided");
     }
@@ -26,7 +26,7 @@ export const createGroundText = ({ scene, text, zPos }) => {
         textGeometry.rotateX(-Math.PI / 2);
         textMesh.castShadow = true;
         textMesh.receiveShadow = true;
-        textMesh.position.set(0, -6, zPos);
+        textMesh.position.set(xPos, -6, zPos);
         textMesh.visible = true;
         scene.add(textMesh);
     });

@@ -3,8 +3,8 @@ import * as THREE from "three";
 export const Init = () => {
     const initScene = () => {
         const scene = new THREE.Scene();
-        scene.background = createGradientTexture("#ff9e9e", "#d8a1ff");
-        scene.fog = new THREE.FogExp2("#F7CFE7", 0.0014);
+        scene.background = createGradientTexture("#29181c", "#40232a");
+        scene.fog = new THREE.FogExp2("#7D5F68", 0.0014);
         scene.position.set(0, 0, -2000);
         return scene;
     };
@@ -15,6 +15,7 @@ export const Init = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.shadowMap.autoUpdate = true;
         return renderer;
     };
 
@@ -25,12 +26,15 @@ export const Init = () => {
         const far = 20000;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
         camera.position.y = 80;
-        camera.position.z = 0;
-        camera.position.x = 0;
+        camera.position.z = -200;
+        camera.position.x = 80;
+
+        /* Used for animations */
         // camera.position.y = 1200;
         // camera.lookAt(0, 0, 0);
         // camera.position.x = 100;
         // camera.position.z = 0;
+
         return camera;
     };
 

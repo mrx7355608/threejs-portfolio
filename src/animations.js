@@ -4,8 +4,8 @@ import { getEvents } from "./events";
 export const Animations = (camera) => {
     const playIntroAnimation = () => {
         gsap.to(camera.position, {
-            y: 70, // Move down
-            z: -100, // Move forward
+            y: 80, // Move down
+            z: -200, // Move forward
             duration: 3,
             ease: "power2.out",
         });

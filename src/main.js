@@ -38,7 +38,7 @@ createSkillBoards();
 /* 3D text */
 const { createText } = Text3D(scene);
 createText({
-    text: "Hello! I am Fawad",
+    text: "Hi! I am Fawad",
     size: 30,
     frontColor: "#f7cfe7",
     zPos: 1500,
@@ -54,14 +54,14 @@ createText({
     xPos: 50,
 });
 
-const { addProjectsToScene } = Projects(scene);
+const { addProjectsToScene } = Projects(scene, camera);
 addProjectsToScene();
 
 /* Animations */
 const { playIntroAnimation } = Animations(camera, scene);
 
-createGroundText({ scene, text: "S K I L L S", zPos: 800 });
-createGroundText({ scene, text: "P R O J E C T S", zPos: -800 });
+createGroundText({ scene, text: "S K I L L S", zPos: 800, xPos: 0 });
+createGroundText({ scene, text: "P R O J E C T S", zPos: -800, xPos: -50 });
 
 /* Animation Loop */
 renderer.setAnimationLoop(() => {
@@ -74,4 +74,4 @@ document.addEventListener("wheel", (e) => {
     camera.position.z -= e.deltaY / 10;
 });
 
-// setTimeout(playIntroAnimation, 2000);
+setTimeout(playIntroAnimation, 4000);

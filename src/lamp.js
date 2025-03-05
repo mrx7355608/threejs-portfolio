@@ -19,9 +19,13 @@ export const SetupLampModel = (scene) => {
         modelLoader.load("models/street-lamp.glb", (gltf) => {
             const lamp = gltf.scene;
             const lamp2 = lamp.clone();
+            const lamp3 = lamp.clone();
+            const lamp4 = lamp.clone();
 
             setupStreetLamp(lamp, 300, 450);
-            setupStreetLamp(lamp2, -200, -250);
+            setupStreetLamp(lamp2, -200, -250, true);
+            setupStreetLamp(lamp3, -100, 1600, true);
+            setupStreetLamp(lamp4, 300, 1600, true);
         });
     };
 
@@ -42,7 +46,7 @@ export const SetupLampModel = (scene) => {
             }
         });
 
-        const lampLight = new THREE.PointLight("#FFB347", 20000);
+        const lampLight = new THREE.PointLight("#FFB347", 10000);
         lampLight.position.set(
             x < 0 ? x + 10 : x - 10,
             lamp.position.y + 10,
@@ -50,6 +54,8 @@ export const SetupLampModel = (scene) => {
         );
         lampLight.castShadow = true;
         lampLight.decay = 2;
+        lampLight.shadow.mapSize.width = 1024;
+        lampLight.shadow.mapSize.height = 1024;
         scene.add(lampLight);
         scene.add(lamp);
         if (enableFlicker) {
@@ -70,7 +76,7 @@ export const SetupLampModel = (scene) => {
             }
         });
 
-        const lampLight = new THREE.PointLight("#FFB347", 80000);
+        const lampLight = new THREE.PointLight("#FFB347", 80000, 1000);
         lampLight.position.set(
             x < 0 ? x + 50 : x - 50,
             lamp.position.y + 100,

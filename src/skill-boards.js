@@ -12,10 +12,10 @@ export const SetupSkillBoards = (scene) => {
         modelsLoader.load("models/wooden-sign.glb", function (gltf) {
             const board = gltf.scene;
             createBoard(board, "react", 300, 350, 31);
-            createBoard(board, "linux", 280, -400, 31);
             createBoard(board, "prisma", -200, -350, -270);
             createBoard(board, "nextjs", 320, 500, 30);
-            createBoard(board, "mongodb", -200, -200, 20);
+            createBoard(board, "linux", 280, -400, 31);
+            createBoard(board, "mongodb", 280, -250, 30);
             createBoard(board, "git", -200, 380, -270);
             createBoard(board, "typescript", -220, 470, 20);
         });
