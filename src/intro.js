@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 
-export const Text3D = (scene) => {
+export const Intro = (scene) => {
     const loader = new FontLoader();
 
     const createText = ({ text, size, frontColor, zPos, yPos, xPos }) => {
@@ -28,5 +28,24 @@ export const Text3D = (scene) => {
         });
     };
 
-    return { createText };
+    const showIntro = () => {
+        createText({
+            text: "Hi! I am Fawad",
+            size: 30,
+            frontColor: "red",
+            zPos: 1500,
+            yPos: 50,
+            xPos: -100,
+        });
+        createText({
+            text: "A Fullstack Developer",
+            size: 13,
+            frontColor: "#f7cfe7",
+            zPos: 1500,
+            yPos: 30,
+            xPos: 50,
+        });
+    };
+
+    return { showIntro };
 };

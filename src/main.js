@@ -4,7 +4,7 @@ import { SetupTreeModels } from "./trees";
 import { Snowfall } from "./snowfall";
 import { SnowPlane } from "./snow-plane";
 import { Animations } from "./animations";
-import { Text3D } from "./text";
+import { Intro } from "./intro";
 import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
@@ -22,7 +22,7 @@ scene.add(ambient);
 const snowfall = Snowfall();
 scene.add(snowfall.snowfall);
 
-/* Snow plane */
+/* Plane */
 const { plane } = SnowPlane();
 scene.add(plane);
 
@@ -35,25 +35,11 @@ initStreetLamp();
 initTreeAndTreeRocks();
 createSkillBoards();
 
-/* 3D text */
-const { createText } = Text3D(scene);
-createText({
-    text: "Hi! I am Fawad",
-    size: 30,
-    frontColor: "red",
-    zPos: 1500,
-    yPos: 50,
-    xPos: -100,
-});
-createText({
-    text: "A Fullstack Developer",
-    size: 13,
-    frontColor: "#f7cfe7",
-    zPos: 1500,
-    yPos: 30,
-    xPos: 50,
-});
+/* Intro */
+const { showIntro } = Intro(scene);
+showIntro();
 
+/* Projects */
 const { addProjectsToScene } = Projects(scene, camera);
 addProjectsToScene();
 
