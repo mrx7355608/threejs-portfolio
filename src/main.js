@@ -47,40 +47,66 @@ createSkillBoards();
 const { addProjectsToScene } = Projects(scene, camera);
 addProjectsToScene();
 
+/* Animations */
+const {
+    playIntroAnimation,
+    playRotationAnimation,
+    playReverseRotationAnimation,
+} = Animations(camera, scene);
+
 /* Add scroll event listener */
 document.body.appendChild(renderer.domElement);
+
+let isRotated = false;
 document.addEventListener("wheel", (e) => {
-    if (camera.position.z <= -200) {
-        camera.position.x += e.deltaY / 10;
-        camera.updateProjectionMatrix();
+    // if (camera.position.z < -160) {
+    //     camera.position.x += e.deltaY / 10;
+    //     camera.updateProjectionMatrix();
+    //     playRotationAnimation();
+    // } else if (camera.position.x < 90 && rotated) {
+    //     playReverseRotationAnimation();
+    // }
+
+    const isScrollingUp = e.deltaY < 0;
+    if (isScrollingUp) {
+        if (camera.position.x < 80 && isRotated) {
+            playReverseRotationAnimation();
+            isRotated = false;
+            return;
+        }
+    }
+
+    if (camera.position.z < -160 && !isRotated) {
+        playRotationAnimation();
+        isRotated = true;
         return;
     }
-    camera.updateProjectionMatrix();
-    camera.position.z -= e.deltaY / 10;
-});
+    if (isRotated) {
+        camera.position.x += e.deltaY / 10;
+        return;
+    }
 
-/* Animations */
-const { playIntroAnimation, playRotationAnimation } = Animations(camera, scene);
+    camera.position.z -= e.deltaY / 10;
+    camera.updateProjectionMatrix();
+});
 
 /* Animation Loop */
 const animate = () => {
     snowfall.animateSnowfall();
-
-    if (camera.position.z < -200) {
-        playRotationAnimation();
-    }
     renderer.render(scene, camera);
 };
 
 loadingManager.onLoad = () => {
-    document.getElementById("loading-screen").style.display = "none";
-    renderer.setAnimationLoop(animate);
-    setTimeout(playIntroAnimation, 1000);
+    setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+        renderer.setAnimationLoop(animate);
+        setTimeout(playIntroAnimation, 1000);
+    }, 2000);
 };
 
 getEvents().addEventListener("intro-animation-complete", () => {
     const elem = document.getElementById("tip-screen");
     elem.style.display = "flex";
 
-    setTimeout(() => (elem.style.display = "none"), 5000);
+    setTimeout(() => (elem.style.display = "none"), 8000);
 });

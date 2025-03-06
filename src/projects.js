@@ -31,14 +31,13 @@ export const Projects = (scene, camera) => {
     const createImagePlane = ({ previewImage, position, yRotation }) => {
         const geom = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT);
         const texture = textureLoader.load(previewImage);
-        const material = new THREE.MeshPhongMaterial({
+        const material = new THREE.MeshBasicMaterial({
             map: texture,
         });
         const mesh = new THREE.Mesh(geom, material);
         mesh.position.copy(position);
         mesh.castShadow = true;
         mesh.rotation.y = yRotation;
-        mesh.rotation.x = -Math.PI / 12;
         scene.add(mesh);
     };
 

@@ -4,7 +4,7 @@ import { textureLoader } from "./loaders";
 const numFlakes = 15000;
 const maxRange = -5000;
 const minRange = maxRange / 2;
-const minHeight = 150;
+const minHeight = 250;
 
 export const Snowfall = () => {
     const positions = [];
