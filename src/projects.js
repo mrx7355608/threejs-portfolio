@@ -4,7 +4,7 @@ import { fontLoader, modelsLoader, textureLoader } from "./loaders";
 
 export const Projects = (scene, camera) => {
     const aspect = 1920 / 1080;
-    const PLANE_WIDTH = 300;
+    const PLANE_WIDTH = 250;
     const PLANE_HEIGHT = PLANE_WIDTH / aspect;
 
     const raycaster = new THREE.Raycaster();
@@ -17,18 +17,18 @@ export const Projects = (scene, camera) => {
         code,
         demo,
         position,
-        yRotation = -Math.PI / 2,
+        rotateY = false,
     }) => {
-        createImagePlane({ previewImage, position, yRotation });
-        createTitleAndStackTexts({ title, stack, position, yRotation });
+        createImagePlane({ previewImage, position, rotateY });
+        createTitleAndStackTexts({ title, stack, position, rotateY });
         createSourceAndLiveSignBoard({
             position,
-            yRotation,
+            rotateY,
             urls: [code, demo],
         });
     };
 
-    const createImagePlane = ({ previewImage, position, yRotation }) => {
+    const createImagePlane = ({ previewImage, position, rotateY }) => {
         const geom = new THREE.PlaneGeometry(PLANE_WIDTH, PLANE_HEIGHT);
         const texture = textureLoader.load(previewImage);
         const material = new THREE.MeshBasicMaterial({
@@ -37,16 +37,17 @@ export const Projects = (scene, camera) => {
         const mesh = new THREE.Mesh(geom, material);
         mesh.position.copy(position);
         mesh.castShadow = true;
-        mesh.rotation.y = yRotation;
+        if (rotateY) {
+            mesh.rotation.y = -Math.PI / 2;
+            // mesh.rotation.x = 0;
+        } else {
+            mesh.rotation.y = 0;
+            mesh.rotation.x = -Math.PI / 24;
+        }
         scene.add(mesh);
     };
 
-    const createTitleAndStackTexts = ({
-        title,
-        stack,
-        position,
-        yRotation,
-    }) => {
+    const createTitleAndStackTexts = ({ title, stack, position, rotateY }) => {
         if (!title) {
             throw new Error("Title text is missing");
         }
@@ -58,37 +59,37 @@ export const Projects = (scene, camera) => {
             /* Title text */
             const titleTextGeom = new TextGeometry(title, {
                 font: font,
-                size: 18,
+                size: 14,
                 depth: 0,
             });
             const material = new THREE.MeshBasicMaterial({
-                color: "red",
+                color: "#F28D95",
             });
             const mesh1 = new THREE.Mesh(titleTextGeom, material);
             mesh1.castShadow = true;
             mesh1.receiveShadow = true;
-            mesh1.position.x = position.x;
-            mesh1.position.y = position.y - 90;
-            mesh1.position.z = position.z + 20;
-            mesh1.rotation.y = yRotation;
+            mesh1.position.x = rotateY ? position.x - 10 : position.x - 100;
+            mesh1.position.y = position.y - 50;
+            mesh1.position.z = rotateY ? position.z - 100 : position.z + 20;
+            mesh1.rotation.y = rotateY ? -Math.PI / 2 : 0;
             scene.add(mesh1);
 
             /* Stack text */
             const stackTextGeom = new TextGeometry(stack, {
                 font: font,
-                size: 10,
+                size: 6,
                 depth: 0,
             });
             const material2 = new THREE.MeshBasicMaterial({
-                color: "blue",
+                color: "#FFF4C2",
             });
             const mesh2 = new THREE.Mesh(stackTextGeom, material2);
             mesh2.castShadow = true;
             mesh2.receiveShadow = true;
-            mesh2.position.x = position.x;
-            mesh2.position.y = position.y - 100;
-            mesh2.position.z = position.z + 20;
-            mesh2.rotation.y = yRotation;
+            mesh2.position.x = rotateY ? position.x - 10 : position.x - 100;
+            mesh2.position.y = position.y - 60;
+            mesh2.position.z = rotateY ? position.z - 100 : position.z + 25;
+            mesh2.rotation.y = rotateY ? -Math.PI / 2 : 0;
             scene.add(mesh2);
         });
     };
@@ -111,18 +112,14 @@ export const Projects = (scene, camera) => {
             }
         });
     };
-    const createSourceAndLiveSignBoard = ({ position, yRotation, urls }) => {
+
+    const createSourceAndLiveSignBoard = ({ position, rotateY, urls }) => {
         modelsLoader.load("models/wooden-sign2.glb", (gltf) => {
             const board = gltf.scene;
             board.scale.set(80, 80, 80);
-            board.position.y = 0;
-            board.position.x = position.x;
-            board.position.z = position.z + 200;
-            board.rotation.y = yRotation;
-            if (yRotation === 0) {
-                board.position.x = position.x + 190;
-                board.position.z = position.z + 20;
-            }
+            board.position.x = rotateY ? position.x - 10 : position.x + 190;
+            board.position.z = rotateY ? position.z + 200 : position.z + 20;
+            board.rotation.y = rotateY ? -Math.PI / 2 : 0;
             board.traverse((child) => {
                 if (child.isMesh) {
                     child.castShadow = true;
@@ -137,39 +134,47 @@ export const Projects = (scene, camera) => {
     };
 
     const addProjectsToScene = () => {
-        // createProject({
-        //     title: "CHAT APPLICATION",
-        //     stack: "MongoDB, Nextjs, Prisma, Ably Realtime",
-        //     previewImage: "textures/projects/chatapplication.png",
-        //     code: "https://github.com/mrx7355608/chatapplication",
-        //     demo: null,
-        //     position: new THREE.Vector3(50, 90, -1100),
-        //     first: true,
-        // });
         createProject({
             title: "Linux Rice",
             stack: "Archlinux, Hyprland, Waybar, Kitty, Neovim",
             previewImage: "textures/projects/linux-rice.png",
             code: "https://github.com/mrx7355608/dotfiles",
             demo: null,
-            position: new THREE.Vector3(50, 90, -1100),
-            yRotation: 0,
+            position: new THREE.Vector3(600, 80, -650),
+            rotateY: true,
+        });
+        createProject({
+            title: "Linux Rice",
+            stack: "Archlinux, Hyprland, Waybar, Kitty, Neovim",
+            previewImage: "textures/projects/linux-rice.png",
+            code: "https://github.com/mrx7355608/dotfiles",
+            demo: null,
+            position: new THREE.Vector3(50, 80, 100),
         });
         createProject({
             title: "Medium.com Clone",
-            stack: "MERN",
+            stack: "React, Typescript, Express, MongoDB, ChakraUI",
             previewImage: "textures/projects/medium-clone.png",
             code: "https://github.com/mrx7355608/chatapplication",
             demo: null,
-            position: new THREE.Vector3(1100, 90, -900),
+            position: new THREE.Vector3(50, 80, -400),
         });
         createProject({
             title: "Facebook clone",
-            stack: "MERN",
+            stack: "React, Nodejs, Express, MongoDB, Tailwindcss",
             previewImage: "textures/projects/facebook-clone.png",
             code: "https://github.com/mrx7355608/chatapplication",
             demo: null,
-            position: new THREE.Vector3(1500, 90, -900),
+            position: new THREE.Vector3(900, 80, -650),
+            rotateY: true,
+        });
+        createProject({
+            title: "Facebook clone",
+            stack: "React, Nodejs, Express, MongoDB, Tailwindcss",
+            previewImage: "textures/projects/facebook-clone.png",
+            code: "https://github.com/mrx7355608/chatapplication",
+            demo: null,
+            position: new THREE.Vector3(50, 80, -750),
         });
     };
 

@@ -14,16 +14,22 @@ export const SetupTreeModels = (scene) => {
                 const clonedTree6 = tree.clone();
                 const clonedTree7 = tree.clone();
                 const clonedTree8 = tree.clone();
+                const clonedTree9 = tree.clone();
+                const clonedTree10 = tree.clone();
+                const clonedTree11 = tree.clone();
 
                 adjustTreeAndAddToScene(clonedTree1, -400, 1100);
                 adjustTreeAndAddToScene(clonedTree2, -400, 1500);
-                adjustTreeAndAddToScene(clonedTree3, -400, 700);
+                adjustTreeAndAddToScene(clonedTree3, -450, 700);
                 adjustTreeAndAddToScene(clonedTree4, -400, 200);
                 adjustTreeAndAddToScene(clonedTree5, -400, -100);
                 adjustTreeAndAddToScene(clonedTree6, -400, -500);
                 adjustTreeAndAddToScene(clonedTree7, -400, -900);
-                adjustTreeAndAddToScene(clonedTree8, -150, -1300, true);
-                adjustTreeAndAddToScene(tree, 400, -1400, true);
+                adjustTreeAndAddToScene(clonedTree8, -150, -1000, true);
+                adjustTreeAndAddToScene(clonedTree9, 400, -1000, true);
+                adjustTreeAndAddToScene(tree, 800, -1000, true);
+                adjustTreeAndAddToScene(clonedTree10, 1200, -1000, true);
+                adjustTreeAndAddToScene(clonedTree11, 1600, -1000, true);
 
                 scene.add(tree);
             },
@@ -43,10 +49,20 @@ export const SetupTreeModels = (scene) => {
                 const clonedTreesAndRocks2 = treeAndRocks.clone();
                 const clonedTreesAndRocks3 = treeAndRocks.clone();
 
-                adjustTreeRocksAndAddToScene(treeAndRocks, 500, 1200);
+                adjustTreeRocksAndAddToScene(treeAndRocks, 600, 1200);
                 adjustTreeRocksAndAddToScene(clonedTreesAndRocks1, 600, 500);
-                // adjustTreeRocksAndAddToScene(clonedTreesAndRocks2, 600, -300);
-                // adjustTreeRocksAndAddToScene(clonedTreesAndRocks3, 600, -1600);
+                adjustTreeRocksAndAddToScene(
+                    clonedTreesAndRocks2,
+                    800,
+                    -50,
+                    true,
+                );
+                adjustTreeRocksAndAddToScene(
+                    clonedTreesAndRocks3,
+                    1200,
+                    -50,
+                    true,
+                );
             },
             undefined,
             function (error) {
@@ -70,15 +86,23 @@ export const SetupTreeModels = (scene) => {
         scene.add(tree);
     };
 
-    const adjustTreeRocksAndAddToScene = (treeAndRocks, x, z) => {
+    const adjustTreeRocksAndAddToScene = (
+        treeAndRocks,
+        x,
+        z,
+        rotateY = false,
+    ) => {
         treeAndRocks.position.set(x, -20, z);
-        treeAndRocks.scale.set(12, 14, 12);
+        treeAndRocks.scale.set(14, 14, 14);
         treeAndRocks.rotation.set(0, -Math.PI / 2, 0);
         treeAndRocks.traverse((child) => {
             if (child.isMesh) {
                 child.castShadow = true;
             }
         });
+        if (rotateY) {
+            treeAndRocks.rotation.y = 270;
+        }
         scene.add(treeAndRocks);
     };
 

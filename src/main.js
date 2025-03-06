@@ -8,9 +8,10 @@ import { Intro } from "./intro";
 import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
-import gsap from "gsap";
+import { Contacts } from "./contact";
 import { loadingManager } from "./loadingManager";
 import { getEvents } from "./events";
+import { Fire } from "./fire";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -47,6 +48,10 @@ createSkillBoards();
 const { addProjectsToScene } = Projects(scene, camera);
 addProjectsToScene();
 
+/* Contacts */
+const { initContactSection } = Contacts(scene);
+initContactSection();
+
 /* Animations */
 const {
     playIntroAnimation,
@@ -54,19 +59,14 @@ const {
     playReverseRotationAnimation,
 } = Animations(camera, scene);
 
+const { createFire, animateFire } = Fire(scene);
+createFire();
+
 /* Add scroll event listener */
 document.body.appendChild(renderer.domElement);
 
 let isRotated = false;
 document.addEventListener("wheel", (e) => {
-    // if (camera.position.z < -160) {
-    //     camera.position.x += e.deltaY / 10;
-    //     camera.updateProjectionMatrix();
-    //     playRotationAnimation();
-    // } else if (camera.position.x < 90 && rotated) {
-    //     playReverseRotationAnimation();
-    // }
-
     const isScrollingUp = e.deltaY < 0;
     if (isScrollingUp) {
         if (camera.position.x < 80 && isRotated) {
@@ -76,7 +76,7 @@ document.addEventListener("wheel", (e) => {
         }
     }
 
-    if (camera.position.z < -160 && !isRotated) {
+    if (camera.position.z < 50 && !isRotated) {
         playRotationAnimation();
         isRotated = true;
         return;
@@ -93,6 +93,7 @@ document.addEventListener("wheel", (e) => {
 /* Animation Loop */
 const animate = () => {
     snowfall.animateSnowfall();
+    animateFire();
     renderer.render(scene, camera);
 };
 
@@ -100,7 +101,7 @@ loadingManager.onLoad = () => {
     setTimeout(() => {
         document.getElementById("loading-screen").style.display = "none";
         renderer.setAnimationLoop(animate);
-        setTimeout(playIntroAnimation, 1000);
+        // setTimeout(playIntroAnimation, 1000);
     }, 2000);
 };
 

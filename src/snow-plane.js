@@ -16,17 +16,7 @@ export const SnowPlane = (scene) => {
         scene.add(mesh);
     };
 
-    const displayPlane = () => {
-        initPlane();
-        createGroundText({ text: "S K I L L S", zPos: 800, xPos: 0 });
-        createGroundText({
-            text: "P R O J E C T S",
-            zPos: -400,
-            xPos: -50,
-        });
-    };
-
-    const createGroundText = ({ text, zPos, xPos }) => {
+    const createGroundText = ({ text, zPos, xPos, rotateY = 0 }) => {
         if (!text) {
             throw new Error("No text provided");
         }
@@ -50,7 +40,24 @@ export const SnowPlane = (scene) => {
             textMesh.castShadow = true;
             textMesh.receiveShadow = true;
             textMesh.position.set(xPos, -6, zPos);
+            textMesh.rotation.y = rotateY;
             scene.add(textMesh);
+        });
+    };
+
+    const displayPlane = () => {
+        initPlane();
+        createGroundText({ text: "S K I L L S", zPos: 1100, xPos: 0 });
+        createGroundText({
+            text: "P R O J E C T S",
+            zPos: 300,
+            xPos: -50,
+        });
+        createGroundText({
+            text: "C O N T A C T",
+            zPos: -720,
+            xPos: 1200,
+            rotateY: -Math.PI / 2,
         });
     };
 

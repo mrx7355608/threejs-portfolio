@@ -8,7 +8,7 @@ export const SetupLampModel = (scene) => {
             const lamp = gltf.scene;
             const lamp1 = lamp.clone();
 
-            setupKeroseneLampAndLampsLight(lamp, -150, 450);
+            setupKeroseneLampAndLampsLight(lamp, -150, 550);
         });
     };
 
@@ -19,9 +19,8 @@ export const SetupLampModel = (scene) => {
             const lamp3 = lamp.clone();
             const lamp4 = lamp.clone();
 
-            setupStreetLamp(lamp, 300, 450);
-            setupStreetLamp(lamp2, -200, -250, true);
-            setupStreetLamp(lamp3, 700, -800);
+            setupStreetLamp(lamp, 300, 900);
+            setupStreetLamp(lamp2, -200, 1000, true);
             // setupStreetLamp(lamp4, 300, 1600, true);
         });
     };
@@ -43,7 +42,7 @@ export const SetupLampModel = (scene) => {
             }
         });
 
-        const lampLight = new THREE.PointLight("#FFB347", 30000);
+        const lampLight = new THREE.PointLight("#FFB347", 20000);
         lampLight.position.set(
             x < 0 ? x + 10 : x - 10,
             lamp.position.y + 20,
@@ -73,7 +72,7 @@ export const SetupLampModel = (scene) => {
             }
         });
 
-        const lampLight = new THREE.PointLight("#FFB347", 60000);
+        const lampLight = new THREE.PointLight("#FFB347", 40000);
         lampLight.position.set(
             x < 0 ? x + 50 : x - 50,
             lamp.position.y + 100,
@@ -91,7 +90,7 @@ export const SetupLampModel = (scene) => {
     };
 
     const flickerLightAnimation = (lampLight) => {
-        lampLight.intensity = 5 + Math.random() * 30000; // Random intensity between 5-7
+        lampLight.intensity = 5 + Math.random() * 40000; // Random intensity between 5-7
         setTimeout(() => flickerLightAnimation(lampLight), Math.random() * 300); // Random delay (0-200ms)
     };
 

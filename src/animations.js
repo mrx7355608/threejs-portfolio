@@ -6,17 +6,15 @@ export const Animations = (camera) => {
         gsap.to(camera.position, {
             y: 70, // Move down
             z: 2500, // Move forward
-            duration: 4,
+            duration: 5,
             ease: "power2.out",
-            immediateRender: false,
         });
 
         gsap.to(camera.rotation, {
             y: 0,
             x: -0.2,
-            duration: 3,
+            duration: 5,
             ease: "power2.out",
-            immediateRender: true,
             onComplete: () => {
                 getEvents().dispatchEvent(
                     new Event("intro-animation-complete"),
@@ -26,10 +24,9 @@ export const Animations = (camera) => {
     };
 
     const playRotationAnimation = () => {
-        /* Move camera in z-axis to cross -160 limit */
         gsap.to(camera.position, {
-            z: -150,
-            duration: 2,
+            z: 70,
+            duration: 1.5,
             ease: "power2.out",
             immediateRender: false,
         });
@@ -38,7 +35,7 @@ export const Animations = (camera) => {
         gsap.to(camera.rotation, {
             x: 0,
             y: -Math.PI / 2,
-            duration: 2,
+            duration: 1.5,
             ease: "power2.out",
             immediateRender: true,
         });
