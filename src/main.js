@@ -9,9 +9,8 @@ import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
 import { Contacts } from "./contact";
-import { loadingManager } from "./loadingManager";
-import { getEvents } from "./events";
-import { Fire } from "./fire";
+// import { loadingManager } from "./loadingManager";
+// import { getEvents } from "./events";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -49,7 +48,7 @@ const { addProjectsToScene } = Projects(scene, camera);
 addProjectsToScene();
 
 /* Contacts */
-const { initContactSection } = Contacts(scene);
+const { initContactSection, animateFire } = Contacts(scene, camera);
 initContactSection();
 
 /* Animations */
@@ -58,9 +57,6 @@ const {
     playRotationAnimation,
     playReverseRotationAnimation,
 } = Animations(camera, scene);
-
-const { createFire, animateFire } = Fire(scene);
-createFire();
 
 /* Add scroll event listener */
 document.body.appendChild(renderer.domElement);
@@ -71,6 +67,7 @@ document.addEventListener("wheel", (e) => {
     if (isScrollingUp) {
         if (camera.position.x < 80 && isRotated) {
             playReverseRotationAnimation();
+            camera.updateProjectionMatrix();
             isRotated = false;
             return;
         }
@@ -78,11 +75,13 @@ document.addEventListener("wheel", (e) => {
 
     if (camera.position.z < 50 && !isRotated) {
         playRotationAnimation();
+        camera.updateProjectionMatrix();
         isRotated = true;
         return;
     }
     if (isRotated) {
         camera.position.x += e.deltaY / 10;
+        camera.updateProjectionMatrix();
         return;
     }
 
@@ -97,17 +96,19 @@ const animate = () => {
     renderer.render(scene, camera);
 };
 
-loadingManager.onLoad = () => {
-    setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-        renderer.setAnimationLoop(animate);
-        // setTimeout(playIntroAnimation, 1000);
-    }, 2000);
-};
+renderer.setAnimationLoop(animate);
 
-getEvents().addEventListener("intro-animation-complete", () => {
-    const elem = document.getElementById("tip-screen");
-    elem.style.display = "flex";
-
-    setTimeout(() => (elem.style.display = "none"), 8000);
-});
+// loadingManager.onLoad = () => {
+//     setTimeout(() => {
+//         document.getElementById("loading-screen").style.display = "none";
+//         renderer.setAnimationLoop(animate);
+//         // setTimeout(playIntroAnimation, 1000);
+//     }, 2000);
+// };
+//
+// getEvents().addEventListener("intro-animation-complete", () => {
+//     const elem = document.getElementById("tip-screen");
+//     elem.style.display = "flex";
+//
+//     setTimeout(() => (elem.style.display = "none"), 8000);
+// });
