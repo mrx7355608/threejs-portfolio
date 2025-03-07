@@ -1,5 +1,6 @@
 import * as THREE from "three";
-import { modelsLoader, textureLoader } from "./loaders";
+import { modelsLoader, textureLoader, fontLoader } from "./loaders";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 
 export const Contacts = (scene, camera) => {
@@ -8,7 +9,7 @@ export const Contacts = (scene, camera) => {
     const fireParticles = new THREE.Group();
     const particleCount = 200;
     const particles = [];
-    const fireSharedPosition = new THREE.Vector3(1350, 5, -650);
+    const fireSharedPosition = new THREE.Vector3(1400, 5, -650);
 
     const loadBonfireModel = () => {
         modelsLoader.load("models/bonfire.glb", (gltf) => {
@@ -21,7 +22,7 @@ export const Contacts = (scene, camera) => {
                     child.receiveShadow = true;
                 }
             });
-            const pointLight = new THREE.PointLight("#FF4500", 30000);
+            const pointLight = new THREE.PointLight("yellow", 30000);
             pointLight.position.copy(fireSharedPosition);
             scene.add(pointLight);
             scene.add(bonfire);
@@ -31,7 +32,7 @@ export const Contacts = (scene, camera) => {
     const loadCatModel = () => {
         modelsLoader.load("models/cat.glb", (gltf) => {
             const cat = gltf.scene;
-            cat.position.set(1350, 0, -720);
+            cat.position.set(1400, 0, -720);
             cat.scale.set(0.2, 0.2, 0.2);
             cat.rotation.y = 20;
             cat.traverse((child) => {
@@ -95,14 +96,14 @@ export const Contacts = (scene, camera) => {
             const bench = gltf.scene;
             bench.scale.set(200, 200, 200);
             bench.rotation.y = -30;
-            bench.position.set(1400, 0, -550);
+            bench.position.set(1500, 0, -550);
             bench.traverse((child) => {
                 if (child.isMesh) {
                     child.castShadow = true;
                     child.receiveShadow = true;
                 }
             });
-            createBoxes(bench);
+            // createBoxes(bench);
             scene.add(bench);
         });
     };
@@ -177,11 +178,69 @@ export const Contacts = (scene, camera) => {
         }
     };
 
+    const create3dText = ({
+        text,
+        zPos,
+        yPos = 0,
+        xPos,
+        color,
+        rotateY = 0,
+    }) => {
+        if (!text) {
+            throw new Error("No text provided");
+        }
+
+        fontLoader.load("fonts/ibm_blex.typeface.json", (font) => {
+            const textGeometry = new TextGeometry(text, {
+                font: font,
+                size: 15,
+                depth: 0,
+                bevelEnabled: true,
+                bevelSize: 1,
+                bevelOffset: 1,
+                bevelSegments: 6,
+            });
+            const material = new THREE.MeshPhongMaterial({
+                color: color,
+            });
+            const textMesh = new THREE.Mesh(textGeometry, material);
+
+            textMesh.castShadow = true;
+            textMesh.receiveShadow = true;
+            textMesh.position.set(xPos, yPos, zPos);
+            textMesh.rotation.y = rotateY;
+            scene.add(textMesh);
+        });
+    };
+
     const initContactSection = () => {
         loadBonfireModel();
         createFire();
         loadCatModel();
         loadBenchModel();
+        create3dText({
+            text: "GITHUB",
+            zPos: -600,
+            xPos: 1500,
+            rotateY: -1.8,
+            yPos: 35,
+            color: "#4d4d4d",
+        });
+        create3dText({
+            text: "LINKED IN",
+            zPos: -550,
+            yPos: 2,
+            xPos: 1440,
+            rotateY: -90,
+            color: "#0077b5",
+        });
+        create3dText({
+            text: "EMAIL",
+            zPos: -700,
+            xPos: 1490,
+            rotateY: -Math.PI / 2,
+            color: "yellow",
+        });
         window.addEventListener("click", onMouseClick);
     };
 
