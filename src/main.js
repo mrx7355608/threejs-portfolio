@@ -9,8 +9,8 @@ import { SetupLampModel } from "./lamp";
 import { SetupSkillBoards } from "./skill-boards";
 import { Projects } from "./projects";
 import { Contacts } from "./contact";
-// import { loadingManager } from "./loadingManager";
-// import { getEvents } from "./events";
+import { loadingManager } from "./loadingManager";
+import { getEvents } from "./events";
 
 /* Main setup things */
 const { scene, camera, renderer } = Init();
@@ -64,6 +64,7 @@ document.body.appendChild(renderer.domElement);
 let isRotated = false;
 let isAnimating = false;
 document.addEventListener("wheel", (e) => {
+    // Prevents movement during animations
     if (isAnimating) return;
 
     const isScrollingUp = e.deltaY < 0;
@@ -75,6 +76,17 @@ document.addEventListener("wheel", (e) => {
             isRotated = false;
             return;
         }
+    }
+
+    // Stop user from scrolling infinitely into x-axis
+    if (camera.position.x >= 1300) {
+        camera.position.x = 1299;
+        return;
+    }
+
+    if (camera.position.z >= 2500) {
+        camera.position.z = 2499;
+        return;
     }
 
     if (camera.position.z < 50 && !isRotated) {
@@ -97,26 +109,25 @@ document.addEventListener("wheel", (e) => {
 /* Animation Loop */
 const animate = () => {
     snowfall.animateSnowfall();
-    animateFire();
+    if (camera.position.x >= 700) {
+        animateFire();
+    }
     renderer.render(scene, camera);
 };
+loadingManager.onLoad = () => {
+    setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+        renderer.setAnimationLoop(animate);
+        setTimeout(() => {
+            isAnimating = true;
+            playIntroAnimation(() => (isAnimating = false));
+        }, 500);
+    }, 2000);
+};
 
-renderer.setAnimationLoop(animate);
+getEvents().addEventListener("intro-animation-complete", () => {
+    const elem = document.getElementById("tip-screen");
+    elem.style.display = "flex";
 
-// loadingManager.onLoad = () => {
-//     setTimeout(() => {
-//         document.getElementById("loading-screen").style.display = "none";
-//         renderer.setAnimationLoop(animate);
-//         // setTimeout(() => {
-//         isAnimating = true;
-//         playIntroAnimation(() => isAnimating = false)
-//         }, 1000);
-//     }, 2000);
-// };
-//
-// getEvents().addEventListener("intro-animation-complete", () => {
-//     const elem = document.getElementById("tip-screen");
-//     elem.style.display = "flex";
-//
-//     setTimeout(() => (elem.style.display = "none"), 8000);
-// });
+    setTimeout(() => (elem.style.display = "none"), 8000);
+});

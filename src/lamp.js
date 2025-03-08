@@ -20,7 +20,7 @@ export const SetupLampModel = (scene) => {
             const lamp4 = lamp.clone();
 
             setupStreetLamp(lamp, 300, 900);
-            setupStreetLamp(lamp2, -200, 1000, true);
+            setupStreetLamp(lamp2, -200, 1000);
             // setupStreetLamp(lamp4, 300, 1600, true);
         });
     };

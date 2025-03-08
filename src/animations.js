@@ -6,20 +6,22 @@ export const Animations = (camera) => {
         gsap.to(camera.position, {
             y: 70, // Move down
             z: 2500, // Move forward
-            duration: 5,
-            ease: "power2.out",
+            duration: 3,
+            ease: "power1.out",
+            autoAlpha: 1,
         });
 
         gsap.to(camera.rotation, {
             y: 0,
             x: -0.2,
-            duration: 5,
-            ease: "power2.out",
+            duration: 3,
+            ease: "power1.out",
+            autoAlpha: 1,
             onComplete: () => {
+                cb();
                 getEvents().dispatchEvent(
                     new Event("intro-animation-complete"),
                 );
-                cb();
             },
         });
     };

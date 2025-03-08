@@ -4,7 +4,7 @@ import { fontLoader } from "./loaders";
 
 export const SnowPlane = (scene) => {
     const initPlane = () => {
-        const geometry = new THREE.PlaneGeometry(5000, 6500, 128, 128);
+        const geometry = new THREE.PlaneGeometry(5000, 5000, 8, 8);
         const material = new THREE.MeshPhongMaterial({
             color: "white",
         });
