@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { getEvents } from "./events";
 
 export const Animations = (camera) => {
-    const playIntroAnimation = () => {
+    const playIntroAnimation = (cb) => {
         gsap.to(camera.position, {
             y: 70, // Move down
             z: 2500, // Move forward
@@ -19,11 +19,12 @@ export const Animations = (camera) => {
                 getEvents().dispatchEvent(
                     new Event("intro-animation-complete"),
                 );
+                cb();
             },
         });
     };
 
-    const playRotationAnimation = () => {
+    const playRotationAnimation = (cb) => {
         gsap.to(camera.position, {
             z: 70,
             duration: 1.5,
@@ -38,16 +39,19 @@ export const Animations = (camera) => {
             duration: 1.5,
             ease: "power2.out",
             immediateRender: true,
+            ease: "power2.out",
+            onComplete: cb,
         });
     };
 
-    const playReverseRotationAnimation = () => {
+    const playReverseRotationAnimation = (cb) => {
         gsap.to(camera.rotation, {
             y: 0,
             x: 0,
             z: 0,
             duration: 1,
             ease: "power2.out",
+            onComplete: cb,
         });
     };
 

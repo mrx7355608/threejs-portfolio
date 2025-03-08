@@ -62,11 +62,15 @@ const {
 document.body.appendChild(renderer.domElement);
 
 let isRotated = false;
+let isAnimating = false;
 document.addEventListener("wheel", (e) => {
+    if (isAnimating) return;
+
     const isScrollingUp = e.deltaY < 0;
     if (isScrollingUp) {
         if (camera.position.x < 80 && isRotated) {
-            playReverseRotationAnimation();
+            isAnimating = true;
+            playReverseRotationAnimation(() => (isAnimating = false));
             camera.updateProjectionMatrix();
             isRotated = false;
             return;
@@ -74,7 +78,8 @@ document.addEventListener("wheel", (e) => {
     }
 
     if (camera.position.z < 50 && !isRotated) {
-        playRotationAnimation();
+        isAnimating = true;
+        playRotationAnimation(() => (isAnimating = false));
         camera.updateProjectionMatrix();
         isRotated = true;
         return;
@@ -102,7 +107,10 @@ renderer.setAnimationLoop(animate);
 //     setTimeout(() => {
 //         document.getElementById("loading-screen").style.display = "none";
 //         renderer.setAnimationLoop(animate);
-//         // setTimeout(playIntroAnimation, 1000);
+//         // setTimeout(() => {
+//         isAnimating = true;
+//         playIntroAnimation(() => isAnimating = false)
+//         }, 1000);
 //     }, 2000);
 // };
 //
