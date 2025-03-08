@@ -108,61 +108,6 @@ export const Contacts = (scene, camera) => {
         });
     };
 
-    const createBoxes = (bench) => {
-        const githubIcon = textureLoader.load(
-            "textures/social-icons/github.png",
-        );
-        const linkedinIcon = textureLoader.load(
-            "textures/social-icons/linkedin.png",
-        );
-        const emailIcon = textureLoader.load(
-            "textures/social-icons/envelope.png",
-        );
-        const githubUrl = "https://github.com/mrx7355608";
-        const linkedinUrl = "https://linkedin.com/in/fawadimran";
-        const myEmail = "mailto:fawad.imran.000@gmail.com";
-        const github = createSocialIconBox(githubIcon, githubUrl);
-        const linkedin = createSocialIconBox(linkedinIcon, linkedinUrl);
-        const email = createSocialIconBox(emailIcon, myEmail);
-
-        // Adjust positions
-        const { x, y, z } = bench.position;
-        github.position.set(x + 5, y + 40, z - 30);
-        linkedin.position.set(x + 3, y + 40, z - 10);
-        email.position.set(x, y + 40, z + 10);
-        scene.add(github);
-        scene.add(email);
-        scene.add(linkedin);
-    };
-
-    const createSocialIconBox = (texture, url) => {
-        const boxGeom = new RoundedBoxGeometry(12, 18, 18, 18, 2);
-        const sideMaterial = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-        });
-        const frontMaterial = new THREE.MeshStandardMaterial({
-            color: "white",
-            map: texture,
-        });
-
-        // BoxGeometry with different materials for each face
-        const materials = [
-            sideMaterial, // Right
-            frontMaterial, // Front
-            sideMaterial, // Left
-            sideMaterial, // Top (will be replaced)
-            sideMaterial, // Bottom
-            sideMaterial, // Back
-        ];
-
-        const mesh = new THREE.Mesh(boxGeom, materials);
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        mesh.rotation.y = -0.2;
-        mesh.userData.url = url;
-        return mesh;
-    };
-
     const onMouseClick = (event) => {
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -178,14 +123,7 @@ export const Contacts = (scene, camera) => {
         }
     };
 
-    const create3dText = ({
-        text,
-        zPos,
-        yPos = 0,
-        xPos,
-        color,
-        rotateY = 0,
-    }) => {
+    const create3dText = ({ text, zPos, yPos = 0, xPos, rotateY = 0 }) => {
         if (!text) {
             throw new Error("No text provided");
         }
@@ -196,15 +134,14 @@ export const Contacts = (scene, camera) => {
                 size: 15,
                 depth: 0,
                 bevelEnabled: true,
-                bevelSize: 1,
+                bevelSize: 2,
                 bevelOffset: 1,
-                bevelSegments: 6,
+                curveSegments: 5,
             });
             const material = new THREE.MeshPhongMaterial({
-                color: color,
+                color: "#ff9966",
             });
             const textMesh = new THREE.Mesh(textGeometry, material);
-
             textMesh.castShadow = true;
             textMesh.receiveShadow = true;
             textMesh.position.set(xPos, yPos, zPos);
@@ -224,7 +161,6 @@ export const Contacts = (scene, camera) => {
             xPos: 1500,
             rotateY: -1.8,
             yPos: 35,
-            color: "#4d4d4d",
         });
         create3dText({
             text: "LINKED IN",
@@ -232,14 +168,12 @@ export const Contacts = (scene, camera) => {
             yPos: 2,
             xPos: 1440,
             rotateY: -90,
-            color: "#0077b5",
         });
         create3dText({
             text: "EMAIL",
             zPos: -700,
             xPos: 1490,
             rotateY: -Math.PI / 2,
-            color: "yellow",
         });
         window.addEventListener("click", onMouseClick);
     };
